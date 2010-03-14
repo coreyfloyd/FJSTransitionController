@@ -7,17 +7,16 @@
 //
 
 #import "DummyViewController.h"
-#import "UIViewController+FJSKeyedViewController.h"
-#import "FJSKeyedViewController.h"
+#import "FJSTransitionController.h"
 
 @implementation DummyViewController
 
 
 - (IBAction)newxtVC{
-	self.keyedViewController.animationType = FJSAnimationTypePop;
-	self.keyedViewController.animationDuration = 1.0;
+	self.transitionController.animationType = FJSAnimationTypePop;
+	self.transitionController.animationDuration = 1.0;
 
-	[self.keyedViewController loadControllerForKey:@"Another"]; 
+	[self.transitionController loadViewControllerForKey:@"Another"]; 
 	
 }
 

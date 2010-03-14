@@ -7,8 +7,7 @@
 //
 
 #import "AnotherViewController.h"
-#import "UIViewController+FJSKeyedViewController.h"
-#import "FJSKeyedViewController.h"
+#import "FJSTransitionController.h"
 
 
 @implementation AnotherViewController
@@ -16,11 +15,11 @@
 
 - (IBAction)pop{
 	
-	self.keyedViewController.animationType = FJSAnimationTypeFade;
-	self.keyedViewController.animationDirection = FJSAnimationDirectionLeft;
-	self.keyedViewController.animationDuration = 1.0;
+	self.transitionController.animationType = FJSAnimationTypeFade;
+	self.transitionController.animationDirection = FJSAnimationDirectionLeft;
+	self.transitionController.animationDuration = 1.0;
 
-	[self.keyedViewController loadControllerForKey:@"Dummy"];
+	[self.transitionController loadViewControllerForKey:@"Dummy"];
 	
 }
 /*

@@ -1,13 +1,5 @@
 //
-//  FJSKeyedViewControllerViewController.m
-//  FJSKeyedViewController
-//
-//  Created by Corey Floyd on 3/12/10.
-//  Copyright Flying Jalapeño Software 2010. All rights reserved.
-//
-
-#import "FJSKeyedViewController.h"
-#import "UIViewController+FJSKeyedViewController.h"
+#import "FJSTransitionController.h"
 #import "FTAnimation.h"
 #import "SDNextRunloopProxy.h"
 #import <objc/runtime.h>
@@ -18,7 +10,44 @@ static NSString* kBundleNameKey = @"kBundleNameKey";
 
 
 
-@interface FJSKeyedViewController ()
+
+@interface UIViewController (SetFJSTransitionController)
+
+- (void)setTransitionController:(FJSTransitionController*)transitionController;
+
+@end
+
+
+
+@implementation UIViewController (SetFJSTransitionController)
+
+static NSMutableDictionary* _controllers = nil;
+
+- (void)setTransitionController:(FJSTransitionController*)transitionController{
+	
+	if(_controllers == nil)
+		_controllers = [[NSMutableDictionary alloc] init];
+	
+	[_controllers setObject:transitionController forKey:[NSString stringWithFormat:@"%i", [self hash]]];
+	
+}
+
+@end
+
+
+
+@implementation UIViewController (FJSTransitionController)
+
+- (FJSTransitionController*)transitionController{
+	
+	return [FJSTransitionController transitionControllerForViewController:self];
+}
+
+@end
+
+
+
+@interface FJSTransitionController ()
 
 @property(nonatomic,retain)NSMutableDictionary *controllers;
 @property(nonatomic,retain)NSMutableDictionary *controllerMetaData;
@@ -50,7 +79,7 @@ static NSString* kBundleNameKey = @"kBundleNameKey";
 
 @end
 
-@implementation FJSKeyedViewController
+@implementation FJSTransitionController
 
 @synthesize controllers;
 @synthesize controllerMetaData;
@@ -154,7 +183,7 @@ static NSString* kBundleNameKey = @"kBundleNameKey";
 #pragma mark -
 #pragma mark Add VC
 
-- (void)setController:(UIViewController*)controller forKey:(NSString*)key{
+- (void)setViewController:(UIViewController*)controller forKey:(NSString*)key{
 	
 	if([self.currentViewControllerKey isEqualToString:key])
 		return;
@@ -164,10 +193,10 @@ static NSString* kBundleNameKey = @"kBundleNameKey";
 	[self.controllers setObject:controller forKey:key];
 	[self.controllerMetaData removeObjectForKey:key];
 	
-	[controller setKeyedViewController:self];
+	[controller setTransitionController:self];
 	
 }
-- (void)setControllerWithClass:(Class)viewControllerClass forKey:(NSString*)key{
+- (void)setViewControllerWithClass:(Class)viewControllerClass forKey:(NSString*)key{
 
 	if([self.currentViewControllerKey isEqualToString:key])
 		return;
@@ -179,7 +208,7 @@ static NSString* kBundleNameKey = @"kBundleNameKey";
 
 	
 }
-- (void)setControllerWithClass:(Class)viewControllerClass nib:(NSString*)aNibName bundle:(NSString*)bundle forKey:(NSString*)key{
+- (void)setViewControllerWithClass:(Class)viewControllerClass nib:(NSString*)aNibName bundle:(NSString*)bundle forKey:(NSString*)key{
 	
 	if([self.currentViewControllerKey isEqualToString:key])
 		return;
@@ -191,7 +220,7 @@ static NSString* kBundleNameKey = @"kBundleNameKey";
 
 }	
 
-- (void)removeControllerForKey:(NSString*)key{
+- (void)removeViewControllerForKey:(NSString*)key{
 	
 	[self.controllers removeObjectForKey:key];
 	[self.controllerMetaData removeObjectForKey:key];
@@ -201,18 +230,18 @@ static NSString* kBundleNameKey = @"kBundleNameKey";
 #pragma mark -
 #pragma mark Load VC
 
-- (NSString*)loadController:(UIViewController*)controller{
+- (NSString*)loadViewController:(UIViewController*)controller{
 	
 	NSString* key = [NSString stringWithFormat:@"%i", [controller hash]];
 	
-	[self setController:controller forKey:key];
-	[self loadControllerForKey:key];
+	[self setViewController:controller forKey:key];
+	[self loadViewControllerForKey:key];
 	
 	return key;
 }
 
 
-- (void)loadControllerForKey:(NSString*)key{
+- (void)loadViewControllerForKey:(NSString*)key{
 	
 	UIViewController* vc = [self.controllers objectForKey:key];
 	
@@ -240,13 +269,15 @@ static NSString* kBundleNameKey = @"kBundleNameKey";
 - (void)prepareViewController:(UIViewController*)viewController{
 
 	[viewController viewWillAppear:YES];
-	
+	viewController.view.userInteractionEnabled = YES;
+	   
 	[[self nextRunloopProxy] showViewController:viewController];
 }
 
 - (void)showViewController:(UIViewController*)viewController{
 	
 	[self.previousViewController viewWillDisappear:YES];
+	self.previousViewController.view.userInteractionEnabled = NO;
 	
 	[self.view addSubview:viewController.view];
 	
@@ -264,39 +295,6 @@ static NSString* kBundleNameKey = @"kBundleNameKey";
 }
 
 
-#pragma mark -
-#pragma mark Amimation
-
-- (void)prepareAnimationForViewController:(UIViewController*)viewController{
-	
-	if(self.animationType == FJSAnimationTypeNone)
-		return;
-	
-	viewController.view.hidden = YES;
-	
-	if(self.animationType == FJSAnimationTypeSlide){
-		
-		[viewController.view slideInFrom:self.animationDirection duration:self.animationDuration delegate:self];
-		
-	}else if(self.animationType == FJSAnimationTypeFade){
-		
-		[viewController.view fadeIn:self.animationDuration delegate:self];
-		
-	}else if(self.animationType == FJSAnimationTypeFall){
-		
-		[viewController.view fallIn:self.animationDuration delegate:self];
-		
-	}else if(self.animationType == FJSAnimationTypePop){
-		
-		[viewController.view popIn:self.animationDuration delegate:self];
-		
-	}else if(self.animationType == FJSAnimationTypeBack){
-		
-		[viewController.view backInFrom:self.animationDirection withFade:NO duration:self.animationDuration delegate:self];
-		
-	}
-	
-}
 
 
 #pragma mark -
@@ -366,7 +364,7 @@ static NSString* kBundleNameKey = @"kBundleNameKey";
 		
 	}
 	
-	[controller setKeyedViewController:self];
+	[controller setTransitionController:self];
 
 	return [controller autorelease];
 }
@@ -392,6 +390,47 @@ static NSString* kBundleNameKey = @"kBundleNameKey";
 	return metaData;
 	
 } 
+
+#pragma mark -
+#pragma mark Amimation
+
+- (void)prepareAnimationForViewController:(UIViewController*)viewController{
+	
+	if(self.animationType == FJSAnimationTypeNone)
+		return;
+	
+	viewController.view.hidden = YES;
+	
+	if(self.animationType == FJSAnimationTypeSlide){
+		
+		[viewController.view slideInFrom:self.animationDirection duration:self.animationDuration delegate:self];
+		
+	}else if(self.animationType == FJSAnimationTypeFade){
+		
+		[viewController.view fadeIn:self.animationDuration delegate:self];
+		
+	}else if(self.animationType == FJSAnimationTypeFall){
+		
+		[viewController.view fallIn:self.animationDuration delegate:self];
+		
+	}else if(self.animationType == FJSAnimationTypePop){
+		
+		[viewController.view popIn:self.animationDuration delegate:self];
+		
+	}else if(self.animationType == FJSAnimationTypeBack){
+		
+		[viewController.view backInFrom:self.animationDirection withFade:NO duration:self.animationDuration delegate:self];
+		
+	}
+	
+}
+
++ (FJSTransitionController*)transitionControllerForViewController:(UIViewController*)controller{
+	
+	return [_controllers objectForKey:[NSString stringWithFormat:@"%i", [controller hash]]];
+
+	
+}
 
 
 

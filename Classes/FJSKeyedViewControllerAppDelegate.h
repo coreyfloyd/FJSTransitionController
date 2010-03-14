@@ -8,15 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@class FJSKeyedViewController;
+@class FJSTransitionController;
 
 @interface FJSKeyedViewControllerAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
-    FJSKeyedViewController *viewController;
+    FJSTransitionController *viewController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet FJSKeyedViewController *viewController;
+@property (nonatomic, retain) IBOutlet FJSTransitionController *viewController;
 
 @end
 

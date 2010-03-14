@@ -7,7 +7,7 @@
 //
 
 #import "FJSKeyedViewControllerAppDelegate.h"
-#import "FJSKeyedViewController.h"
+#import "FJSTransitionController.h"
 #import "DummyViewController.h"
 #import "AnotherViewController.h"
 
@@ -21,14 +21,14 @@
     
     // Override point for customization after app launch    
 	
-	[self.viewController setControllerWithClass:[DummyViewController class] nib:@"DummyViewController" bundle:nil forKey:@"Dummy"];
+	[self.viewController setViewControllerWithClass:[DummyViewController class] nib:@"DummyViewController" bundle:nil forKey:@"Dummy"];
 		
-	[self.viewController loadControllerForKey:@"Dummy"];
+	[self.viewController loadViewControllerForKey:@"Dummy"];
 	
 	
 	AnotherViewController* a = [[AnotherViewController alloc] initWithNibName:@"AnotherViewController" bundle:nil];
 	
-	[self.viewController setController:a forKey:@"Another"];
+	[self.viewController setViewController:a forKey:@"Another"];
 
 	
     [window addSubview:viewController.view];
