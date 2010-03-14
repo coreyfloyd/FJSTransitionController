@@ -16,7 +16,6 @@
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* FJSKeyedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* FJSKeyedViewController.m */; };
 		C4F711D9114B00F000517517 /* UIViewController+FJSKeyedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F711D8114B00F000517517 /* UIViewController+FJSKeyedViewController.m */; };
-		C4F711E7114B050C00517517 /* DrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F711E6114B050C00517517 /* DrawerController.m */; };
 		C4F71239114B067A00517517 /* FTAnimation+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F71231114B067A00517517 /* FTAnimation+UIView.m */; };
 		C4F7123A114B067A00517517 /* FTAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F71232114B067A00517517 /* FTAnimationManager.m */; };
 		C4F7123B114B067A00517517 /* FTUtils+NSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F71233114B067A00517517 /* FTUtils+NSObject.m */; };
@@ -44,8 +43,6 @@
 		8D1107310486CEB800E47090 /* FJSKeyedViewController-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FJSKeyedViewController-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		C4F711D7114B00F000517517 /* UIViewController+FJSKeyedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+FJSKeyedViewController.h"; sourceTree = "<group>"; };
 		C4F711D8114B00F000517517 /* UIViewController+FJSKeyedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+FJSKeyedViewController.m"; sourceTree = "<group>"; };
-		C4F711E5114B050C00517517 /* DrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawerController.h; sourceTree = "<group>"; };
-		C4F711E6114B050C00517517 /* DrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawerController.m; sourceTree = "<group>"; };
 		C4F71231114B067A00517517 /* FTAnimation+UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "FTAnimation+UIView.m"; path = "Dependencies/FTUtils/Classes/FTAnimation+UIView.m"; sourceTree = "<group>"; };
 		C4F71232114B067A00517517 /* FTAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTAnimationManager.m; path = Dependencies/FTUtils/Classes/FTAnimationManager.m; sourceTree = "<group>"; };
 		C4F71233114B067A00517517 /* FTUtils+NSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "FTUtils+NSObject.m"; path = "Dependencies/FTUtils/Classes/FTUtils+NSObject.m"; sourceTree = "<group>"; };
@@ -89,8 +86,6 @@
 				28D7ACF70DDB3853001CB0EB /* FJSKeyedViewController.m */,
 				C4F711D7114B00F000517517 /* UIViewController+FJSKeyedViewController.h */,
 				C4F711D8114B00F000517517 /* UIViewController+FJSKeyedViewController.m */,
-				C4F711E5114B050C00517517 /* DrawerController.h */,
-				C4F711E6114B050C00517517 /* DrawerController.m */,
 				C4F7132B114B0E7800517517 /* SDNextRunloopProxy.h */,
 				C4F7132C114B0E7800517517 /* SDNextRunloopProxy.m */,
 				C4F713CE114C201000517517 /* DummyViewController.h */,
@@ -229,7 +224,6 @@
 				1D3623260D0F684500981E51 /* FJSKeyedViewControllerAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* FJSKeyedViewController.m in Sources */,
 				C4F711D9114B00F000517517 /* UIViewController+FJSKeyedViewController.m in Sources */,
-				C4F711E7114B050C00517517 /* DrawerController.m in Sources */,
 				C4F71239114B067A00517517 /* FTAnimation+UIView.m in Sources */,
 				C4F7123A114B067A00517517 /* FTAnimationManager.m in Sources */,
 				C4F7123B114B067A00517517 /* FTUtils+NSObject.m in Sources */,

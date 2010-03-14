@@ -39,6 +39,7 @@ typedef enum {
 	
 	FJSAnimationType animationType;
 	FJSAnimationDirection animationDirection;
+	float animationDuration;
 }
 @property(nonatomic,readonly,retain)UIViewController *currentViewController;
 @property(nonatomic,readonly,retain)NSString *currentViewControllerKey;
@@ -50,6 +51,7 @@ typedef enum {
 
 @property(nonatomic,assign)FJSAnimationType animationType;
 @property(nonatomic,assign)FJSAnimationDirection animationDirection;
+@property(nonatomic,assign)float animationDuration;
 
 
 - (void)setController:(UIViewController*)controller forKey:(NSString*)key;

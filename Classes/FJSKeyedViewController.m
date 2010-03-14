@@ -14,7 +14,7 @@
 
 static NSString* kClassNameKey = @"kClassNameKey";
 static NSString* kNibNameKey = @"kNibNameKey";
-static NSString* kBundleNameKey = @"kNibNameKey";
+static NSString* kBundleNameKey = @"kBundleNameKey";
 
 
 
@@ -37,6 +37,7 @@ static NSString* kBundleNameKey = @"kNibNameKey";
 
 - (void)prepareViewController:(UIViewController*)viewController;
 - (void)showViewController:(UIViewController*)viewController;
+- (void)finalizeViewController:(UIViewController*)viewController;
 
 
 - (void)prepareViewControllerForRemoval:(UIViewController*)viewController;
@@ -45,6 +46,7 @@ static NSString* kBundleNameKey = @"kNibNameKey";
 - (void)unloadViewController:(UIViewController*)viewController;
 - (void)unloadViewControllerForKey:(NSString*)key;
 
+- (void)prepareAnimationForViewController:(UIViewController*)viewController;
 
 @end
 
@@ -54,6 +56,7 @@ static NSString* kBundleNameKey = @"kNibNameKey";
 @synthesize controllerMetaData;
 @synthesize animationType;
 @synthesize animationDirection;
+@synthesize animationDuration;
 
 @synthesize currentViewController;
 @synthesize currentViewControllerKey;
@@ -226,9 +229,55 @@ static NSString* kBundleNameKey = @"kNibNameKey";
 
 - (void)showViewController:(UIViewController*)viewController{
 	
+	[self.previousViewController viewWillDisappear:YES];
+	
 	[self.view addSubview:viewController.view];
+	
+	[self prepareAnimationForViewController:viewController];
 
-	[[viewController nextRunloopProxy] viewDidAppear:YES];
+	[[self nextRunloopProxy] finalizeViewController:viewController];
+	
+}
+
+- (void)finalizeViewController:(UIViewController*)viewController{
+	
+	[self.previousViewController viewDidDisappear:YES];
+	
+	[viewController viewDidAppear:YES];
+}
+
+
+#pragma mark -
+#pragma mark Amimation
+
+- (void)prepareAnimationForViewController:(UIViewController*)viewController{
+	
+	if(self.animationType == FJSAnimationTypeNone)
+		return;
+	
+	viewController.view.hidden = YES;
+	
+	if(self.animationType == FJSAnimationTypeSlide){
+		
+		[viewController.view slideInFrom:self.animationDirection duration:self.animationDuration delegate:self];
+		
+	}else if(self.animationType == FJSAnimationTypeFade){
+		
+		[viewController.view fadeIn:self.animationDuration delegate:self];
+		
+	}else if(self.animationType == FJSAnimationTypeFall){
+		
+		[viewController.view fallIn:self.animationDuration delegate:self];
+		
+	}else if(self.animationType == FJSAnimationTypePop){
+		
+		[viewController.view popIn:self.animationDuration delegate:self];
+		
+	}else if(self.animationType == FJSAnimationTypeBack){
+		
+		[viewController.view backInFrom:self.animationDirection withFade:NO duration:self.animationDuration delegate:self];
+		
+	}
 	
 }
 
@@ -302,7 +351,7 @@ static NSString* kBundleNameKey = @"kNibNameKey";
 	
 	[controller setKeyedViewController:self];
 
-	return controller;
+	return [controller autorelease];
 }
 
 

@@ -21,12 +21,8 @@
     
     // Override point for customization after app launch    
 	
-	DummyViewController* vc = [[DummyViewController alloc] initWithNibName:@"DummyViewController" bundle:nil];
-	
-	//[self.viewController loadController:vc];
-	
-	[self.viewController setController:vc forKey:@"Dummy"];
-	
+	[self.viewController setControllerWithClass:[DummyViewController class] nib:@"DummyViewController" bundle:nil forKey:@"Dummy"];
+		
 	[self.viewController loadControllerForKey:@"Dummy"];
 	
 	

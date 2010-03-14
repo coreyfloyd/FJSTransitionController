@@ -16,6 +16,10 @@
 
 - (IBAction)pop{
 	
+	self.keyedViewController.animationType = FJSAnimationTypeBack;
+	self.keyedViewController.animationDirection = FJSAnimationDirectionLeft;
+	self.keyedViewController.animationDuration = 1.0;
+
 	[self.keyedViewController loadControllerForKey:@"Dummy"];
 	
 }
