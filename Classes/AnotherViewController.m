@@ -16,7 +16,7 @@
 
 - (IBAction)pop{
 	
-	self.keyedViewController.animationType = FJSAnimationTypeBack;
+	self.keyedViewController.animationType = FJSAnimationTypeFade;
 	self.keyedViewController.animationDirection = FJSAnimationDirectionLeft;
 	self.keyedViewController.animationDuration = 1.0;
 

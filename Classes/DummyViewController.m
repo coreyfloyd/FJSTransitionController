@@ -14,7 +14,7 @@
 
 
 - (IBAction)newxtVC{
-	self.keyedViewController.animationType = FJSAnimationTypeFall;
+	self.keyedViewController.animationType = FJSAnimationTypePop;
 	self.keyedViewController.animationDuration = 1.0;
 
 	[self.keyedViewController loadControllerForKey:@"Another"]; 

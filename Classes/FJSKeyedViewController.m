@@ -145,6 +145,12 @@ static NSString* kBundleNameKey = @"kBundleNameKey";
 	return [self.controllers objectForKey:key];
 }
 
+- (Class)viewControllerClassForKey:(NSString*)key{
+	
+	return NSClassFromString([[self.controllerMetaData objectForKey:key] objectForKey:kClassNameKey]);
+	
+}
+
 #pragma mark -
 #pragma mark Add VC
 
@@ -156,6 +162,7 @@ static NSString* kBundleNameKey = @"kBundleNameKey";
 	[self unloadViewControllerForKey:key];
 	
 	[self.controllers setObject:controller forKey:key];
+	[self.controllerMetaData removeObjectForKey:key];
 	
 	[controller setKeyedViewController:self];
 	
@@ -167,7 +174,9 @@ static NSString* kBundleNameKey = @"kBundleNameKey";
 	
 	[self unloadViewControllerForKey:key];
 
+	[self.controllers removeObjectForKey:key];
 	[self.controllerMetaData setObject:[self metaDataForClass:viewControllerClass nib:nil bundle:nil] forKey:key];
+
 	
 }
 - (void)setControllerWithClass:(Class)viewControllerClass nib:(NSString*)aNibName bundle:(NSString*)bundle forKey:(NSString*)key{
@@ -177,9 +186,17 @@ static NSString* kBundleNameKey = @"kBundleNameKey";
 	
 	[self unloadViewControllerForKey:key];
 
+	[self.controllers removeObjectForKey:key];
 	[self.controllerMetaData setObject:[self metaDataForClass:viewControllerClass nib:aNibName bundle:bundle] forKey:key];
 
 }	
+
+- (void)removeControllerForKey:(NSString*)key{
+	
+	[self.controllers removeObjectForKey:key];
+	[self.controllerMetaData removeObjectForKey:key];
+	
+}
 
 #pragma mark -
 #pragma mark Load VC
