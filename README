@@ -1,5 +1,5 @@
 
-FJSKeyedViewController
+FJSTransitionController
 
 This class allows you to load arbitrary view controllers and animate transistions between the views.
 
