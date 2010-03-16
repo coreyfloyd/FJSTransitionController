@@ -29,9 +29,9 @@
 
 typedef enum {
 	FJSAnimationDirectionTop = 0,
-	FJSAnimationDirectionRight,
-	FJSAnimationDirectionBottom,
-	FJSAnimationDirectionLeft
+	FJSAnimationDirectionRight = 1,
+	FJSAnimationDirectionBottom = 2,
+	FJSAnimationDirectionLeft = 3
 }FJSAnimationDirection;
 
 typedef enum {
@@ -41,6 +41,7 @@ typedef enum {
 	FJSAnimationTypeFall,
 	FJSAnimationTypePop,
 	FJSAnimationTypeBack,
+	FJSAnimationTypePush
 }FJSAnimationType;
 
 

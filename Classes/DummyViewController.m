@@ -13,8 +13,9 @@
 
 
 - (IBAction)newxtVC{
-	self.transitionController.animationType = FJSAnimationTypePop;
+	self.transitionController.animationType = FJSAnimationTypePush;
 	self.transitionController.animationDuration = 1.0;
+	self.transitionController.animationDirection = FJSAnimationDirectionLeft;
 
 	[self.transitionController loadViewControllerForKey:@"Another"]; 
 	

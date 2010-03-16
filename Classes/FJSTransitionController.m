@@ -428,9 +428,24 @@ static NSMutableDictionary* _controllers = nil;
 		
 		[viewController.view backInFrom:self.animationDirection withFade:NO duration:self.animationDuration delegate:self];
 		
+	}else if(self.animationType == FJSAnimationTypePush){
+		
+		int direction = self.animationDirection;
+		
+		direction += 2;
+		
+		direction = direction % 4;
+		
+		
+		[self.previousViewController.view slideOutTo:direction duration:self.animationDuration delegate:nil];
+		[viewController.view slideInFrom:self.animationDirection duration:self.animationDuration delegate:self];
+
 	}
 	
 }
+
+
+
 
 + (FJSTransitionController*)transitionControllerForViewController:(UIViewController*)controller{
 	
@@ -438,6 +453,7 @@ static NSMutableDictionary* _controllers = nil;
 
 	
 }
+
 
 
 
