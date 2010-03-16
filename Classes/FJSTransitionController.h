@@ -100,7 +100,11 @@ typedef enum {
 //This is how we display a VC's view, if you specified a transition animation it happens automatically.
 - (void)loadViewControllerForKey:(NSString*)key;
 
-//Lets provide a VC and display its view in one step, KVC will automatically generate a key for you.
+
+//Lets provide a VC and display its view in one step
+- (void)loadViewController:(UIViewController*)controller forKey:(NSString *)key;
+
+//now we  will automatically generate a key for you.
 - (NSString*)loadViewController:(UIViewController*)controller;
 
 //Get all keys for all VCs

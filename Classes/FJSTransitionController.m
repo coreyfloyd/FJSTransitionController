@@ -240,6 +240,12 @@ static NSMutableDictionary* _controllers = nil;
 	return key;
 }
 
+- (void)loadViewController:(UIViewController*)controller forKey:(NSString *)key{
+	
+	[self setViewController:controller forKey:key];
+	[self loadViewControllerForKey:key];
+	
+}
 
 - (void)loadViewControllerForKey:(NSString*)key{
 	
