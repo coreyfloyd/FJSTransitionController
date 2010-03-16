@@ -40,8 +40,9 @@ typedef enum {
 	FJSAnimationTypeFade,
 	FJSAnimationTypeFall,
 	FJSAnimationTypePop,
-	FJSAnimationTypeBack,
-	FJSAnimationTypePush
+	FJSAnimationTypeSlideWithBounce,
+	FJSAnimationTypePush,
+	FJSAnimationTypePushWithBounce
 }FJSAnimationType;
 
 

@@ -424,7 +424,7 @@ static NSMutableDictionary* _controllers = nil;
 		
 		[viewController.view popIn:self.animationDuration delegate:self];
 		
-	}else if(self.animationType == FJSAnimationTypeBack){
+	}else if(self.animationType == FJSAnimationTypeSlideWithBounce){
 		
 		[viewController.view backInFrom:self.animationDirection withFade:NO duration:self.animationDuration delegate:self];
 		
@@ -440,8 +440,20 @@ static NSMutableDictionary* _controllers = nil;
 		[self.previousViewController.view slideOutTo:direction duration:self.animationDuration delegate:nil];
 		[viewController.view slideInFrom:self.animationDirection duration:self.animationDuration delegate:self];
 
+	}else if(self.animationType == FJSAnimationTypePushWithBounce){
+		
+		int direction = self.animationDirection;
+		
+		direction += 2;
+		
+		direction = direction % 4;
+		
+		[self.previousViewController.view slideOutTo:direction duration:(self.animationDuration*.7) delegate:nil];
+		[viewController.view backInFrom:self.animationDirection withFade:NO duration:self.animationDuration delegate:self];
+
+		
 	}
-	
+
 }
 
 

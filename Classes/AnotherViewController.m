@@ -15,7 +15,7 @@
 
 - (IBAction)pop{
 	
-	self.transitionController.animationType = FJSAnimationTypeFade;
+	self.transitionController.animationType = FJSAnimationTypePushWithBounce;
 	self.transitionController.animationDirection = FJSAnimationDirectionLeft;
 	self.transitionController.animationDuration = 1.0;
 

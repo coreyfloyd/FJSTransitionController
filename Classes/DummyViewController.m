@@ -15,7 +15,7 @@
 - (IBAction)newxtVC{
 	self.transitionController.animationType = FJSAnimationTypePush;
 	self.transitionController.animationDuration = 1.0;
-	self.transitionController.animationDirection = FJSAnimationDirectionLeft;
+	self.transitionController.animationDirection = FJSAnimationDirectionRight;
 
 	[self.transitionController loadViewControllerForKey:@"Another"]; 
 	
