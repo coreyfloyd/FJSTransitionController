@@ -100,7 +100,7 @@ typedef enum {
 //----------------------------------------------------------------------
 
 //This is how we display a VC's view, if you specified a transition animation it happens automatically.
-- (void)loadViewControllerForKey:(NSString*)key;
+- (UIViewController*)loadViewControllerForKey:(NSString*)key;
 
 
 //Lets provide a VC and display its view in one step

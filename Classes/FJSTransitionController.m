@@ -253,7 +253,7 @@ static NSMutableDictionary* _controllers = nil;
 	
 }
 
-- (void)loadViewControllerForKey:(NSString*)key{
+- (UIViewController*)loadViewControllerForKey:(NSString*)key{
 	
 	UIViewController* vc = [self.controllers objectForKey:key];
 	
@@ -264,7 +264,7 @@ static NSMutableDictionary* _controllers = nil;
 	}
 	
 	if(vc==nil)
-		return;
+		return nil;
 
 	self.previousViewController = self.currentViewController;
 	self.previousViewControllerKey = self.currentViewControllerKey;
@@ -276,6 +276,8 @@ static NSMutableDictionary* _controllers = nil;
 	[vc.view setFrame:self.view.bounds];
 
 	[[self nextRunloopProxy] prepareViewController:vc];
+	
+	return vc;
 }
 
 - (void)prepareViewController:(UIViewController*)viewController{
