@@ -110,13 +110,19 @@ static NSMutableDictionary* _controllers = nil;
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
 	
-	for(UIViewController *eachVC in self.controllers){
+	for(NSString* eachKey in self.controllers){
 		
+		UIViewController *eachVC = [self.controllers objectForKey:eachKey];
+		
+		//send a memory warning
 		[eachVC didReceiveMemoryWarning];		
 		
+		//if a vc is offscreen, kill it. I am ruthless
 		if([eachVC.view superview] == nil){
 			
-			//TODO: can i nil these out? dont think so, wait i can nil out anything i have metadata for. hmm…
+			[eachVC viewDidUnload];
+			[self.controllers setObject:nil forKey:eachKey];
+			
 		}
 	}
 

@@ -16,7 +16,7 @@
 - (IBAction)pop{
 	
 	self.transitionController.animationType = FJSAnimationTypePushWithBounce;
-	self.transitionController.animationDirection = FJSAnimationDirectionLeft;
+	self.transitionController.animationDirection = FJSAnimationDirectionTop;
 	self.transitionController.animationDuration = 1.0;
 
 	[self.transitionController loadViewControllerForKey:@"Dummy"];
