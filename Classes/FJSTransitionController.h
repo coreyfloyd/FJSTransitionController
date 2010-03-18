@@ -42,7 +42,8 @@ typedef enum {
 	FJSAnimationTypePop,
 	FJSAnimationTypeSlideWithBounce,
 	FJSAnimationTypePush,
-	FJSAnimationTypePushWithBounce
+	FJSAnimationTypePushWithBounce,
+	FJSAnimationTypeReveal
 }FJSAnimationType;
 
 

@@ -460,8 +460,14 @@ static NSMutableDictionary* _controllers = nil;
 		[viewController.view backInFrom:self.animationDirection withFade:NO duration:self.animationDuration delegate:self];
 
 		
-	}
+	}else if(self.animationType == FJSAnimationTypeReveal){
+		
+		viewController.view.hidden = NO;
 
+		[self.view bringSubviewToFront:self.previousViewController.view];
+		[self.previousViewController.view slideOutTo:self.animationDirection duration:(self.animationDuration*.7) delegate:nil];
+		
+	}
 }
 
 
