@@ -6,12 +6,12 @@
 //  Copyright Flying Jalapeño Software 2010. All rights reserved.
 //
 
-#import "FJSKeyedViewControllerAppDelegate.h"
+#import "FJSTransitionControllerDemoAppDelegate.h"
 #import "FJSTransitionController.h"
 #import "DummyViewController.h"
 #import "AnotherViewController.h"
 
-@implementation FJSKeyedViewControllerAppDelegate
+@implementation FJSTransitionControllerDemoAppDelegate
 
 @synthesize window;
 @synthesize viewController;

@@ -10,7 +10,7 @@
 
 @class FJSTransitionController;
 
-@interface FJSKeyedViewControllerAppDelegate : NSObject <UIApplicationDelegate> {
+@interface FJSTransitionControllerDemoAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
     FJSTransitionController *viewController;
 }
