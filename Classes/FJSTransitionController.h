@@ -78,6 +78,12 @@ typedef enum {
 	FJSAnimationType animationType;
 	FJSAnimationDirection animationDirection;
 	float animationDuration;
+	
+	int animationCounter;
+
+	BOOL isTransitioning;
+	BOOL isAnimating;
+
 }
 
 //----------------------------------------------------------------------
@@ -105,7 +111,7 @@ typedef enum {
 
 
 //Lets provide a VC and display its view in one step
-- (void)loadViewController:(UIViewController*)controller forKey:(NSString *)key;
+- (BOOL)loadViewController:(UIViewController*)controller forKey:(NSString *)key;
 
 //now we  will automatically generate a key for you.
 - (NSString*)loadViewController:(UIViewController*)controller;
@@ -150,6 +156,13 @@ typedef enum {
 @property(nonatomic,assign)FJSAnimationType animationType; //Default is FJSAnimationTypeNone
 @property(nonatomic,assign)FJSAnimationDirection animationDirection; //Default is FJSAnimationDirectionTop
 @property(nonatomic,assign)float animationDuration; //Default is 0.0, that's fast!
+
+//Do you ant to know if a transition is going on?
+//Note, the transition controller will not alow you to load a VC while a transition is in progress!
+@property(nonatomic,assign)BOOL isTransitioning;
+
+//Do you ant to know if an animation is going on?
+@property(nonatomic,assign)BOOL isAnimating;
 
 
 //Retrieve the TtansitionController a VC is associated with
