@@ -13,13 +13,13 @@ Currently FJSTransitionController supports 8 types of animations which were crea
 To set associate a view controller with a key:
 
 FJSTransitionControler* myTransitionController;  
-[myTransitionController setVieControllerClass:[MyVC class] forKey:@"myKey"];
+[myTransitionController setViewControllerClass:[MyVC class] forKey:@"myKey"];
 
 To use a nib:  
-[myTransitionController setVieControllerClass:[MyVC class] nib:@"myVC" bundle:nil forKey:@"myKey"];
+[myTransitionController setViewControllerClass:[MyVC class] nib:@"myVC" bundle:nil forKey:@"myKey"];
 
 To load a VC:  
-[myTransitionController loadVieControllerForKey:@"myKey"];
+[myTransitionController loadViewControllerForKey:@"myKey"];
 
 
 ##Animations
