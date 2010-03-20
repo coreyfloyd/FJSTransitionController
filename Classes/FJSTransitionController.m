@@ -313,14 +313,16 @@ static NSMutableDictionary* _controllers = nil;
 - (void)prepareViewController:(UIViewController*)viewController{
 
 	[viewController viewWillAppear:YES];
-	   
+	
+	self.previousViewController.view.userInteractionEnabled = NO;
+	viewController.view.userInteractionEnabled = NO;
+
 	[[self nextRunloopProxy] showViewController:viewController];
 }
 
 - (void)showViewController:(UIViewController*)viewController{
 	
 	[self.previousViewController viewWillDisappear:YES];
-	self.previousViewController.view.userInteractionEnabled = NO;
 	
 	[self.view addSubview:viewController.view];
 
