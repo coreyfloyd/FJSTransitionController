@@ -284,11 +284,18 @@ static NSMutableDictionary* _controllers = nil;
 		
 		vc = [self controllerWithMetaData:[self.controllerMetaData objectForKey:key]];
 
+		if(vc!=nil)
+			[self.controllers setObject:vc forKey:key];
 	}
 	
 	if(vc==nil)
 		return nil;
 
+	
+	//Just in case the previous VC is the next (and not recoverable with metadata), we woould like to prevent deallocation
+	[[self.previousViewController retain] autorelease];
+	[[self.previousViewControllerKey retain] autorelease];
+	
 	self.previousViewController = self.currentViewController;
 	self.previousViewControllerKey = self.currentViewControllerKey;
 	
