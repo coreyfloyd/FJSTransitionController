@@ -116,6 +116,9 @@ typedef enum {
 //now we  will automatically generate a key for you.
 - (NSString*)loadViewController:(UIViewController*)controller;
 
+//Convienence, like a pop you don't have to know what came before you.
+- (void)loadPreviousViewController;
+
 //Get all keys for all VCs
 @property(nonatomic,readonly)NSArray *allKeys;
 

@@ -3,6 +3,7 @@
 #import "FTAnimation.h"
 #import "SDNextRunloopProxy.h"
 #import <objc/runtime.h>
+#import "FTAnimationManager+FJS.h"
 
 static NSString* kClassNameKey = @"kClassNameKey";
 static NSString* kNibNameKey = @"kNibNameKey";
@@ -67,8 +68,9 @@ static NSMutableDictionary* _controllers = nil;
 
 
 - (void)prepareViewController:(UIViewController*)viewController;
+- (void)willShowViewController:(UIViewController*)viewController;
 - (void)showViewController:(UIViewController*)viewController;
-- (void)finalizeViewController:(UIViewController*)viewController;
+- (void)didShowViewController:(UIViewController*)viewController;
 
 
 - (void)prepareViewControllerForRemoval:(UIViewController*)viewController;
@@ -251,6 +253,7 @@ static NSMutableDictionary* _controllers = nil;
 	NSString* key = [NSString stringWithFormat:@"%i", [controller hash]];
 	
 	[self setViewController:controller forKey:key];
+	[controller setTransitionController:self];
 	if([self loadViewControllerForKey:key] == nil)
 		return NO;
 	
@@ -263,6 +266,7 @@ static NSMutableDictionary* _controllers = nil;
 		return NO;
 	
 	[self setViewController:controller forKey:key];
+	[controller setTransitionController:self];
 	if([self loadViewControllerForKey:key] == nil)
 		return NO;
 	
@@ -272,60 +276,74 @@ static NSMutableDictionary* _controllers = nil;
 
 - (UIViewController*)loadViewControllerForKey:(NSString*)key{
 	
-	if(isTransitioning)
-		return nil;
-	
-	if([key isEqualToString:self.currentViewControllerKey])
-		return self.currentViewController;
-	
-	UIViewController* vc = [self.controllers objectForKey:key];
-	
-	if(vc==nil){
 		
-		vc = [self controllerWithMetaData:[self.controllerMetaData objectForKey:key]];
+		if(isTransitioning)
+			return nil;
+		
+		if([key isEqualToString:self.currentViewControllerKey])
+			return self.currentViewController;
+		
+		UIViewController* vc = [self.controllers objectForKey:key];
+		
+		if(vc==nil){
+			
+			vc = [self controllerWithMetaData:[self.controllerMetaData objectForKey:key]];
+			
+			if(vc!=nil)
+				[self.controllers setObject:vc forKey:key];
+		}
+		
+		if(vc==nil)
+			return nil;
+		
+	@synchronized(self){
 
-		if(vc!=nil)
-			[self.controllers setObject:vc forKey:key];
+		//Just in case the previous VC is the next (and not recoverable with metadata), we woould like to prevent deallocation
+		[[self.previousViewController retain] autorelease];
+		[[self.previousViewControllerKey retain] autorelease];
+		
+		self.previousViewController = self.currentViewController;
+		self.previousViewControllerKey = self.currentViewControllerKey;
+		
+		self.currentViewController = vc;
+		self.currentViewControllerKey = key;
+		
+		//Lock Transition Controller
+		self.isTransitioning = YES;
+		
+		[[self nextRunloopProxy] prepareViewController:vc];
+		
+		
 	}
-	
-	if(vc==nil)
-		return nil;
-
-	
-	//Just in case the previous VC is the next (and not recoverable with metadata), we woould like to prevent deallocation
-	[[self.previousViewController retain] autorelease];
-	[[self.previousViewControllerKey retain] autorelease];
-	
-	self.previousViewController = self.currentViewController;
-	self.previousViewControllerKey = self.currentViewControllerKey;
-	
-	self.currentViewController = vc;
-	self.currentViewControllerKey = key;
-	
-	//TODO: remove or move this
-	[vc.view setFrame:self.view.bounds];
-	
-	//Lock Transition Controller
-	self.isTransitioning = YES;
-	
-	[[self nextRunloopProxy] prepareViewController:vc];
-	
 	return vc;
+
 }
 
+- (void)loadPreviousViewController{
+	
+	[self loadViewControllerForKey:self.previousViewControllerKey];
+	
+}
 
 #pragma mark -
 #pragma mark display sequence
 
 - (void)prepareViewController:(UIViewController*)viewController{
+	
+	[viewController.view setFrame:self.view.bounds];
+	
+	[[self nextRunloopProxy] willShowViewController:viewController];
+}
 
+- (void)willShowViewController:(UIViewController*)viewController{
+	
+	[viewController.view setFrame:self.view.bounds];
+	
 	[viewController viewWillAppear:YES];
 	
-	self.previousViewController.view.userInteractionEnabled = NO;
-	viewController.view.userInteractionEnabled = NO;
-
 	[[self nextRunloopProxy] showViewController:viewController];
 }
+
 
 - (void)showViewController:(UIViewController*)viewController{
 	
@@ -336,14 +354,13 @@ static NSMutableDictionary* _controllers = nil;
 	
 	[self prepareAnimationForViewController:viewController];
 
-	[[self nextRunloopProxy] finalizeViewController:viewController];
+	[[self nextRunloopProxy] didShowViewController:viewController];
 	
 }
 
-- (void)finalizeViewController:(UIViewController*)viewController{
+- (void)didShowViewController:(UIViewController*)viewController{
 	
 	[self.previousViewController viewDidDisappear:YES];
-	viewController.view.userInteractionEnabled = YES;
 
 	[viewController viewDidAppear:YES];
 	
@@ -351,6 +368,8 @@ static NSMutableDictionary* _controllers = nil;
 	
 	if(!self.isAnimating)
 		self.isTransitioning = NO;
+	
+	viewController.view.userInteractionEnabled = YES;
 }
 
 

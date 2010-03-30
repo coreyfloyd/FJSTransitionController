@@ -22,7 +22,8 @@
 	self.transitionController.animationDuration = 1.0;
 	self.transitionController.animationDirection = direction;
 
-	[self.transitionController loadViewControllerForKey:@"Dummy"];
+	[[self transitionController] loadPreviousViewController];
+	//[self.transitionController loadViewControllerForKey:@"Dummy"];
 	
 }
 /*
