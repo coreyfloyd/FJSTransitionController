@@ -3,7 +3,6 @@
 #import "FTAnimation.h"
 #import "SDNextRunloopProxy.h"
 #import <objc/runtime.h>
-#import "FTAnimationManager+FJS.h"
 
 static NSString* kClassNameKey = @"kClassNameKey";
 static NSString* kNibNameKey = @"kNibNameKey";
