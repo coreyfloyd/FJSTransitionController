@@ -1,4 +1,12 @@
 
+##Important Submodule Note:
+This applies to users prior to commit d98b1588e44d93f9589c3ff9ddd2c9a51f25f210
+
+A new fork of FTUtils is being used to address some animation issues.     
+You must delete the FTUtils folder after pulling. Then perform a "submodule init/update".   
+
+
+
 #FJSTransitionController
 
 This class allows you to load arbitrary view controllers and animate transitions between the views.
