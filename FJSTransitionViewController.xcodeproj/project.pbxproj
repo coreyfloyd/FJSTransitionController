@@ -14,11 +14,11 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* FJSTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* FJSTransitionController.m */; };
+		C4AC0F9311B1B2E500FEE0ED /* NSObject+Proxy.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AC0F9211B1B2E500FEE0ED /* NSObject+Proxy.m */; };
 		C4F71239114B067A00517517 /* FTAnimation+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F71231114B067A00517517 /* FTAnimation+UIView.m */; };
 		C4F7123A114B067A00517517 /* FTAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F71232114B067A00517517 /* FTAnimationManager.m */; };
 		C4F7123B114B067A00517517 /* FTUtils+NSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F71233114B067A00517517 /* FTUtils+NSObject.m */; };
 		C4F712D1114B06D100517517 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F712D0114B06D100517517 /* QuartzCore.framework */; };
-		C4F7132D114B0E7800517517 /* SDNextRunloopProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F7132C114B0E7800517517 /* SDNextRunloopProxy.m */; };
 		C4F713D1114C201000517517 /* DummyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F713CF114C201000517517 /* DummyViewController.m */; };
 		C4F713D2114C201000517517 /* DummyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4F713D0114C201000517517 /* DummyViewController.xib */; };
 		C4F713E5114C210500517517 /* AnotherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F713E3114C210500517517 /* AnotherViewController.m */; };
@@ -38,6 +38,8 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* FJSTransitionViewController_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FJSTransitionViewController_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* FJSTransitionViewController-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FJSTransitionViewController-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		C4AC0F9111B1B2E500FEE0ED /* NSObject+Proxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Proxy.h"; sourceTree = "<group>"; };
+		C4AC0F9211B1B2E500FEE0ED /* NSObject+Proxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Proxy.m"; sourceTree = "<group>"; };
 		C4F71231114B067A00517517 /* FTAnimation+UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "FTAnimation+UIView.m"; path = "Dependencies/FTUtils/Classes/FTAnimation+UIView.m"; sourceTree = "<group>"; };
 		C4F71232114B067A00517517 /* FTAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTAnimationManager.m; path = Dependencies/FTUtils/Classes/FTAnimationManager.m; sourceTree = "<group>"; };
 		C4F71233114B067A00517517 /* FTUtils+NSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "FTUtils+NSObject.m"; path = "Dependencies/FTUtils/Classes/FTUtils+NSObject.m"; sourceTree = "<group>"; };
@@ -47,8 +49,6 @@
 		C4F71237114B067A00517517 /* FTUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTUtils.h; path = Dependencies/FTUtils/Headers/FTUtils/FTUtils.h; sourceTree = "<group>"; };
 		C4F71238114B067A00517517 /* FTUtils+NSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "FTUtils+NSObject.h"; path = "Dependencies/FTUtils/Headers/FTUtils/FTUtils+NSObject.h"; sourceTree = "<group>"; };
 		C4F712D0114B06D100517517 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		C4F7132B114B0E7800517517 /* SDNextRunloopProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDNextRunloopProxy.h; sourceTree = "<group>"; };
-		C4F7132C114B0E7800517517 /* SDNextRunloopProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDNextRunloopProxy.m; sourceTree = "<group>"; };
 		C4F713CE114C201000517517 /* DummyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DummyViewController.h; sourceTree = "<group>"; };
 		C4F713CF114C201000517517 /* DummyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyViewController.m; sourceTree = "<group>"; };
 		C4F713D0114C201000517517 /* DummyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DummyViewController.xib; sourceTree = "<group>"; };
@@ -79,8 +79,8 @@
 				1D3623250D0F684500981E51 /* FJSTransitionControllerDemoAppDelegate.m */,
 				28D7ACF60DDB3853001CB0EB /* FJSTransitionController.h */,
 				28D7ACF70DDB3853001CB0EB /* FJSTransitionController.m */,
-				C4F7132B114B0E7800517517 /* SDNextRunloopProxy.h */,
-				C4F7132C114B0E7800517517 /* SDNextRunloopProxy.m */,
+				C4AC0F9111B1B2E500FEE0ED /* NSObject+Proxy.h */,
+				C4AC0F9211B1B2E500FEE0ED /* NSObject+Proxy.m */,
 				C4F713CE114C201000517517 /* DummyViewController.h */,
 				C4F713CF114C201000517517 /* DummyViewController.m */,
 				C4F713D0114C201000517517 /* DummyViewController.xib */,
@@ -217,9 +217,9 @@
 				C4F71239114B067A00517517 /* FTAnimation+UIView.m in Sources */,
 				C4F7123A114B067A00517517 /* FTAnimationManager.m in Sources */,
 				C4F7123B114B067A00517517 /* FTUtils+NSObject.m in Sources */,
-				C4F7132D114B0E7800517517 /* SDNextRunloopProxy.m in Sources */,
 				C4F713D1114C201000517517 /* DummyViewController.m in Sources */,
 				C4F713E5114C210500517517 /* AnotherViewController.m in Sources */,
+				C4AC0F9311B1B2E500FEE0ED /* NSObject+Proxy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
