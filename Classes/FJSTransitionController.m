@@ -417,8 +417,6 @@ static NSMutableDictionary* _controllers = nil;
 
 
 
-
-
 - (void)showViewController{
 	
 	[self.previousViewController viewWillDisappear:YES];
@@ -428,7 +426,7 @@ static NSMutableDictionary* _controllers = nil;
 	[self prepareAnimationForViewController];
 
     //If we aren't animating, then lets complete the proper calls
-    //If we are, defer to the animation Delegate method to fire the last bit of logic
+    //If we are animating, we defer to the animation Delegate method to fire the last bit of cleanup logic
     if(!self.isAnimating)
         [[self nextRunloopProxy] didShowViewController];
 	

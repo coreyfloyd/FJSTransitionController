@@ -29,6 +29,11 @@ To use a nib:
 To load a VC:  
 [myTransitionController loadViewControllerForKey:@"myKey"];
 
+Just like the UITabBarController and UINavigationCOntroller, every UIViewController has a convenience property to access the FJSTransitionController instance it has been added to:
+
+@property(nonatomic, readonly) FJSTransitionController* transitionController;
+
+
 
 ##Animations
 You do not have to use animations, but if you want:
@@ -36,6 +41,18 @@ You do not have to use animations, but if you want:
 myTransitionController.animationType = FJSAnimationTypeSlide;  
 myTransitionController.animationDirection = FJSAmimationDirectionTop;  
 myTransitionController.animationDuration = 1.0;
+
+##UINavigationController support
+
+For many View Controllers, an instance of UINavigationController is required for drill down functionality, etc…  
+Unfortunately, providing a fully instantiated view controller and navigation controller mitigates some of the memory saving functionality of the FJSTC.  
+To alleviate this, a new delegate method has been added:
+
+<code>
+- (BOOL)shouldWrapNavigationControllerAroundViewControllerForKey:(NSString*)key;
+</code>
+
+Now the FJSTransitionController will automatically "wrap" your VC in a UINavigationController instance, wheee!
 
 
 
