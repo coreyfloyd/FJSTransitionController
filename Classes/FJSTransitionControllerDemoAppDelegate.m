@@ -22,7 +22,7 @@
     // Override point for customization after app launch    
 	
 	[self.viewController setViewControllerWithClass:[DummyViewController class] nib:@"DummyViewController" bundle:nil forKey:@"Dummy"];
-		
+	[self.viewController wrapViewControllerForkey:@"Dummy" withNavigationController:YES];	
 	[self.viewController loadViewControllerForKey:@"Dummy"];
 	
 	

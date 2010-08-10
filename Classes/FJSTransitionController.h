@@ -20,29 +20,6 @@
 
 
 #import <UIKit/UIKit.h>
-#import "FTAnimation.h"
-
-//Types that are used to set the transition animation
-
-typedef enum {
-	FJSAnimationDirectionTop = 0,
-	FJSAnimationDirectionRight = 1,
-	FJSAnimationDirectionBottom = 2,
-	FJSAnimationDirectionLeft = 3
-}FJSAnimationDirection;
-
-typedef enum {
-	FJSAnimationTypeNone = 0,
-	FJSAnimationTypeSlide,
-	FJSAnimationTypeFade,
-	FJSAnimationTypeFall,
-	FJSAnimationTypePop,
-	FJSAnimationTypeSlideWithBounce,
-	FJSAnimationTypePush,
-	FJSAnimationTypePushWithBounce,
-	FJSAnimationTypeReveal
-}FJSAnimationType;
-
 
 
 /****************************************************************************/
@@ -50,8 +27,6 @@ typedef enum {
 //This UIViewController category allows you to get a pointer to the TransitionController that a VC has been added to.
 
 @class FJSTransitionController;
-
-@protocol FJSTransitionControllerDelegate;
 
 @interface UIViewController (FJSTransitionController)
 
@@ -74,17 +49,8 @@ typedef enum {
 	UIViewController* previousViewController;
 	NSString* previousViewControllerKey;
 	
-	FJSAnimationType animationType;
-	FJSAnimationDirection animationDirection;
-	float animationDuration;
-	
-	int animationCounter;
-
 	BOOL isTransitioning;
-	BOOL isAnimating;
     
-    id<FJSTransitionControllerDelegate> delegate;
-
 }
 
 /****************************************************************************/
@@ -104,6 +70,26 @@ typedef enum {
 //This one allows you to add a fully instantiated VC to the KVC
 //Be warned, VCs added this way will be deallocated after they are removed from the Screen, eventually. I haven't decided when.
 - (void)setViewController:(UIViewController*)controller forKey:(NSString*)key;
+
+
+/****************************************************************************/
+/* 
+ I'll tell you why.
+ Because you want to do 2 things:
+ 1. You want to reap the memory saving benifits of the FJSTransitionController, but
+ 2. You also need a navigation controller for drill down.
+ 
+ Well we have the delegate method for you:
+ 
+ Simply return YES for keys whose VCs you wish to have "wrapped" in a navigation controller.
+ The rest happens autmagically.
+ 
+ (I know it is a long convaluted method name)
+ 
+ */
+
+- (void)wrapViewControllerForkey:(NSString*)key withNavigationController:(BOOL)flag;
+
 
 
 /****************************************************************************/
@@ -170,23 +156,10 @@ typedef enum {
 
 /****************************************************************************/
 /* 
- So you want to animate the transition, well provide some info, fool!
- Animation settings always apply to the next view controller you load. You cannot associate animations with specific view controllers. 
- Meaning: Don't assume the anaimation settins are correct, always reset them before attempting a transition.
-*/
-@property(nonatomic,assign)FJSAnimationType animationType; //Default is FJSAnimationTypeNone
-@property(nonatomic,assign)FJSAnimationDirection animationDirection; //Default is FJSAnimationDirectionTop
-@property(nonatomic,assign)float animationDuration; //Default is 0.0, that's fast!
-
-/* 
  Do you want to know if a transition is happening right now?
  Note, the transition controller will not alow you to load a VC while a transition is in progress! 
 */
 @property(nonatomic,assign)BOOL isTransitioning;
-
-//Do you ant to know if an animation is going on?
-@property(nonatomic,assign)BOOL isAnimating;
-
 /* 
  Retrieve the TtansitionController a VC is associated with
  this works the same as the transitionController property in the UIViewController category
@@ -195,37 +168,7 @@ typedef enum {
 + (FJSTransitionController*)transitionControllerForViewController:(UIViewController*)controller;
 
 
-/* 
- Specify the delegate.
- But why?
- 
- */
-
-@property(nonatomic,assign)id<FJSTransitionControllerDelegate> delegate;
-
 @end
 
-/* 
- I'll tell you why.
- Because you want to do 2 things:
- 1. You want to reap the memory saving benifits of the FJSTransitionController, but
- 2. You also need a navigation controller for drill down.
- 
- Well we have the delegate method for you:
- 
- Simply return YES for keys whose VCs you wish to have "wrapped" in a navigation controller.
- The rest happens autmagically.
- 
- (I know it is a long convaluted method name)
- 
- */
-
-
-@protocol FJSTransitionControllerDelegate <NSObject>
-
-@optional
-- (BOOL)shouldWrapNavigationControllerAroundViewControllerForKey:(NSString*)key;
-
-@end
 
 

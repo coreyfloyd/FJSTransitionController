@@ -1,12 +1,12 @@
 //
 #import "FJSTransitionController.h"
-#import "FTAnimation.h"
 #import "NSObject+Proxy.h"
 #import <objc/runtime.h>
 
 static NSString* kClassNameKey = @"kClassNameKey";
 static NSString* kNibNameKey = @"kNibNameKey";
 static NSString* kBundleNameKey = @"kBundleNameKey";
+static NSString* kNavControllerKey = @"kNavControllerKey";
 
 
 
@@ -58,18 +58,14 @@ static NSMutableDictionary* _controllers = nil;
 @property(nonatomic,readwrite,retain)UIViewController *previousViewController;
 @property(nonatomic,readwrite,retain)NSString *previousViewControllerKey;
 
-@property(nonatomic,assign)int animationCounter;
-
 
 - (UIViewController*)controllerWithMetaData:(NSDictionary*)metaData;
 - (NSDictionary*)metaDataForClass:(Class)class nib:(NSString*)aNibName bundle:(NSString*)bundle;
 
-- (void)prepareViewController;
 - (void)willShowViewController;
 - (void)showViewController;
 - (void)didShowViewController;
 
-- (void)prepareAnimationForViewController;
 
 @end
 
@@ -77,11 +73,6 @@ static NSMutableDictionary* _controllers = nil;
 
 @synthesize controllers;
 @synthesize controllerMetaData;
-@synthesize animationType;
-@synthesize animationDirection;
-@synthesize animationDuration;
-@synthesize isAnimating;
-@synthesize animationCounter;
 
 @synthesize isTransitioning;
 
@@ -89,7 +80,6 @@ static NSMutableDictionary* _controllers = nil;
 @synthesize currentViewControllerKey;
 @synthesize previousViewController;
 @synthesize previousViewControllerKey;
-@synthesize delegate;
 
 
 
@@ -98,7 +88,6 @@ static NSMutableDictionary* _controllers = nil;
 
 
 - (void)dealloc {
-    delegate = nil;
 	[previousViewController release], previousViewController = nil;
 	[previousViewControllerKey release], previousViewControllerKey = nil;	
 	[currentViewControllerKey release], currentViewControllerKey = nil;
@@ -152,11 +141,7 @@ static NSMutableDictionary* _controllers = nil;
 }
 
 - (void)viewDidLoad{
-	
-	[super viewDidLoad];
-	//TODO: do I really need this?
-    [self.currentViewController viewDidLoad];
-    
+	[super viewDidLoad];    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -243,14 +228,6 @@ static NSMutableDictionary* _controllers = nil;
 		return;
 	    
     [controller setTransitionController:self];
-    
-    if([delegate respondsToSelector:@selector(shouldWrapNavigationControllerAroundViewControllerForKey:)] &&
-       [delegate shouldWrapNavigationControllerAroundViewControllerForKey:key]){
-        
-        UINavigationController* nav = [[[UINavigationController alloc] initWithRootViewController:controller] autorelease];    
-        controller = nav;
-    }
-    
 	
 	[self.controllers setObject:controller forKey:key];
 	[self.controllerMetaData removeObjectForKey:key];
@@ -357,7 +334,7 @@ static NSMutableDictionary* _controllers = nil;
 		//Lock Transition Controller
 		self.isTransitioning = YES;
 		
-		[[self nextRunloopProxy] prepareViewController];
+        [[self nextRunloopProxy] willShowViewController];
 		
 	}
     
@@ -377,35 +354,6 @@ static NSMutableDictionary* _controllers = nil;
 #pragma mark -
 #pragma mark display sequence
 
-- (UINavigationController*)wrapViewController:(UIViewController*)controller forKey:(NSString*)key{
- 
-	if([controller isKindOfClass:[UINavigationController class]]){
-		return (UINavigationController*)controller;
-	}
-	
-    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:controller];
-    
-	[self.controllers setObject:nav forKey:key];
-    
-    return [nav autorelease];
-}
-
-
-
-
-- (void)prepareViewController{
-    
-    if([delegate respondsToSelector:@selector(shouldWrapNavigationControllerAroundViewControllerForKey:)] &&
-       [delegate shouldWrapNavigationControllerAroundViewControllerForKey:self.currentViewControllerKey]){
-                 
-        self.currentViewController = [self wrapViewController:self.currentViewController 
-                                                       forKey:self.currentViewControllerKey];
-    
-    }
-        	
-	[[self nextRunloopProxy] willShowViewController];
-}
-
 - (void)willShowViewController{
 
 	[currentViewController.view setFrame:self.view.bounds];
@@ -423,12 +371,7 @@ static NSMutableDictionary* _controllers = nil;
     
     [self.view addSubview:currentViewController.view];
 
-	[self prepareAnimationForViewController];
-
-    //If we aren't animating, then lets complete the proper calls
-    //If we are animating, we defer to the animation Delegate method to fire the last bit of cleanup logic
-    if(!self.isAnimating)
-        [[self nextRunloopProxy] didShowViewController];
+    [[self nextRunloopProxy] didShowViewController];
 	
 }
 
@@ -440,8 +383,7 @@ static NSMutableDictionary* _controllers = nil;
     
 	//Unlock Transition Controller
 	
-	if(!self.isAnimating)
-		self.isTransitioning = NO;
+    self.isTransitioning = NO;
 	
 	currentViewController.view.userInteractionEnabled = YES;
     
@@ -479,6 +421,11 @@ static NSMutableDictionary* _controllers = nil;
 	}
 	
 	[controller setTransitionController:self];
+    
+    BOOL wrapInNav = [[metaData objectForKey:kNavControllerKey] boolValue];
+    
+    if(wrapInNav && ![controller isKindOfClass:[UINavigationController class]])
+        controller = [[UINavigationController alloc] initWithRootViewController:[controller autorelease]];
 
 	return [controller autorelease];
 }
@@ -496,108 +443,27 @@ static NSMutableDictionary* _controllers = nil;
 	[metaData setObject:(NSString*)className forKey:kClassNameKey];
 	
 	if(aNibName != nil)
-		[metaData setObject:aNibName forKey:kNibNameKey];
+		[metaData setObject:[[aNibName copy] autorelease] forKey:kNibNameKey];
 	
 	if(bundle != nil)
-		[metaData setObject:bundle forKey:kBundleNameKey];
+		[metaData setObject:[[bundle copy] autorelease] forKey:kBundleNameKey];
 	
 	return metaData;
 	
 } 
 
-#pragma mark -
-#pragma mark Amimation
 
-- (void)prepareAnimationForViewController{
-	
-	if(self.animationType == FJSAnimationTypeNone)
-		return;
-	
-	//Double checking, is we are going to start another animation, we don't want to be in the middle of one.
-	if(self.isAnimating == YES)
-		return;
-	
-	self.animationCounter = 0;
-	self.isAnimating = YES;
-	
-	currentViewController.view.hidden = YES;
-	
-	if(self.animationType == FJSAnimationTypeSlide){
-		
-		[currentViewController.view slideInFrom:self.animationDirection inView:self.view duration:self.animationDuration delegate:self startSelector:@selector(animationDidStart:) stopSelector:@selector(animationDidStop:finished:)];
-		
-	}else if(self.animationType == FJSAnimationTypeFade){
-		
-		[currentViewController.view fadeIn:self.animationDuration delegate:self startSelector:@selector(animationDidStart:) stopSelector:@selector(animationDidStop:finished:)];
-		
-	}else if(self.animationType == FJSAnimationTypeFall){
-		
-		[currentViewController.view fallIn:self.animationDuration delegate:self startSelector:@selector(animationDidStart:) stopSelector:@selector(animationDidStop:finished:)];
-		
-	}else if(self.animationType == FJSAnimationTypePop){
-		
-		[currentViewController.view popIn:self.animationDuration delegate:self startSelector:@selector(animationDidStart:) stopSelector:@selector(animationDidStop:finished:)];
-		
-	}else if(self.animationType == FJSAnimationTypeSlideWithBounce){
-		
-		[currentViewController.view backInFrom:self.animationDirection inView:self.view withFade:NO duration:self.animationDuration delegate:self startSelector:@selector(animationDidStart:) stopSelector:@selector(animationDidStop:finished:)];
-		
-	}else if(self.animationType == FJSAnimationTypePush){
-		
-		int direction = self.animationDirection;
-		
-		direction += 2;
-		
-		direction = direction % 4;
-		
-		
-		[self.previousViewController.view slideOutTo:direction inView:self.view duration:self.animationDuration delegate:self startSelector:@selector(animationDidStart:) stopSelector:@selector(animationDidStop:finished:)];
-		
-		[currentViewController.view slideInFrom:self.animationDirection inView:self.view duration:self.animationDuration delegate:self startSelector:@selector(animationDidStart:) stopSelector:@selector(animationDidStop:finished:)];
-		
-	}else if(self.animationType == FJSAnimationTypePushWithBounce){
-		
-		int direction = self.animationDirection;
-		
-		direction += 2;
-		
-		direction = direction % 4;
-		
-		[self.previousViewController.view slideOutTo:direction inView:self.view duration:(self.animationDuration*.7) delegate:self startSelector:@selector(animationDidStart:) stopSelector:@selector(animationDidStop:finished:)];
-		[currentViewController.view backInFrom:self.animationDirection inView:self.view withFade:NO duration:self.animationDuration delegate:self startSelector:@selector(animationDidStart:) stopSelector:@selector(animationDidStop:finished:)];
-		
-	}else if(self.animationType == FJSAnimationTypeReveal){
-		
-		currentViewController.view.hidden = NO;
-
-		[self.view bringSubviewToFront:self.previousViewController.view];
-		[self.previousViewController.view slideOutTo:self.animationDirection inView:self.view duration:(self.animationDuration*.7) delegate:self startSelector:@selector(animationDidStart:) stopSelector:@selector(animationDidStop:finished:)];		
-	}
+- (void)wrapViewControllerForkey:(NSString*)key withNavigationController:(BOOL)flag{
+    
+    NSMutableDictionary* meta = [[self.controllerMetaData objectForKey:key] mutableCopy];
+    
+    [meta setObject:[NSNumber numberWithBool:flag] forKey:kNavControllerKey];
+    
+    [self.controllerMetaData setObject:meta forKey:key];
+    
+    [meta release];
+    
 }
-
-
-- (void)animationDidStart:(CAAnimation*)animation{
-	
-	animationCounter++;
-	
-}
-
-
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
-
-	animationCounter--;
-	
-	if(animationCounter < 1){
-		
-		//Animation finished
-		self.isTransitioning = NO;
-		self.isAnimating = NO;
-		
-        [[self nextRunloopProxy] didShowViewController];
-
-	}
-}
-
 
 
 + (FJSTransitionController*)transitionControllerForViewController:(UIViewController*)controller{

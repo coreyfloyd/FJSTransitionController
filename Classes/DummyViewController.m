@@ -13,13 +13,6 @@
 
 
 - (IBAction)newxtVC{
-	
-	FJSAnimationType type = arc4random() % 9;
-	FJSAnimationDirection direction = arc4random() % 4;
-
-	self.transitionController.animationType = type;
-	self.transitionController.animationDuration = 1.0;
-	self.transitionController.animationDirection = direction;
 
 	[self.transitionController loadViewControllerForKey:@"Another"]; 
 	

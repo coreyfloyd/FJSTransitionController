@@ -9,16 +9,12 @@
 /* Begin PBXBuildFile section */
 		1D3623260D0F684500981E51 /* FJSTransitionControllerDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* FJSTransitionControllerDemoAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
-		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* FJSTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* FJSTransitionController.m */; };
+		C45CD4A41210EDDE00517E00 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45CD4A31210EDDE00517E00 /* CoreFoundation.framework */; };
+		C45CD4A61210EDDE00517E00 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45CD4A51210EDDE00517E00 /* Foundation.framework */; };
+		C45CD4A81210EDDE00517E00 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45CD4A71210EDDE00517E00 /* UIKit.framework */; };
 		C4AC0F9311B1B2E500FEE0ED /* NSObject+Proxy.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AC0F9211B1B2E500FEE0ED /* NSObject+Proxy.m */; };
-		C4F71239114B067A00517517 /* FTAnimation+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F71231114B067A00517517 /* FTAnimation+UIView.m */; };
-		C4F7123A114B067A00517517 /* FTAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F71232114B067A00517517 /* FTAnimationManager.m */; };
-		C4F7123B114B067A00517517 /* FTUtils+NSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F71233114B067A00517517 /* FTUtils+NSObject.m */; };
-		C4F712D1114B06D100517517 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F712D0114B06D100517517 /* QuartzCore.framework */; };
 		C4F713D1114C201000517517 /* DummyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F713CF114C201000517517 /* DummyViewController.m */; };
 		C4F713D2114C201000517517 /* DummyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4F713D0114C201000517517 /* DummyViewController.xib */; };
 		C4F713E5114C210500517517 /* AnotherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F713E3114C210500517517 /* AnotherViewController.m */; };
@@ -26,29 +22,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* FJSTransitionControllerDemoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FJSTransitionControllerDemoAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* FJSTransitionControllerDemoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FJSTransitionControllerDemoAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* FJSTransitionViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FJSTransitionViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		28D7ACF60DDB3853001CB0EB /* FJSTransitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FJSTransitionController.h; sourceTree = "<group>"; };
 		28D7ACF70DDB3853001CB0EB /* FJSTransitionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FJSTransitionController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* FJSTransitionViewController_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FJSTransitionViewController_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* FJSTransitionViewController-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FJSTransitionViewController-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		C45CD4A31210EDDE00517E00 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		C45CD4A51210EDDE00517E00 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C45CD4A71210EDDE00517E00 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C4AC0F9111B1B2E500FEE0ED /* NSObject+Proxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Proxy.h"; sourceTree = "<group>"; };
 		C4AC0F9211B1B2E500FEE0ED /* NSObject+Proxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Proxy.m"; sourceTree = "<group>"; };
-		C4F71231114B067A00517517 /* FTAnimation+UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "FTAnimation+UIView.m"; path = "Dependencies/FTUtils/Classes/FTAnimation+UIView.m"; sourceTree = "<group>"; };
-		C4F71232114B067A00517517 /* FTAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTAnimationManager.m; path = Dependencies/FTUtils/Classes/FTAnimationManager.m; sourceTree = "<group>"; };
-		C4F71233114B067A00517517 /* FTUtils+NSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "FTUtils+NSObject.m"; path = "Dependencies/FTUtils/Classes/FTUtils+NSObject.m"; sourceTree = "<group>"; };
-		C4F71234114B067A00517517 /* FTAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTAnimation.h; path = Dependencies/FTUtils/Headers/FTAnimation.h; sourceTree = "<group>"; };
-		C4F71235114B067A00517517 /* FTAnimation+UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "FTAnimation+UIView.h"; path = "Dependencies/FTUtils/Headers/FTUtils/FTAnimation+UIView.h"; sourceTree = "<group>"; };
-		C4F71236114B067A00517517 /* FTAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTAnimationManager.h; path = Dependencies/FTUtils/Headers/FTUtils/FTAnimationManager.h; sourceTree = "<group>"; };
-		C4F71237114B067A00517517 /* FTUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTUtils.h; path = Dependencies/FTUtils/Headers/FTUtils/FTUtils.h; sourceTree = "<group>"; };
-		C4F71238114B067A00517517 /* FTUtils+NSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "FTUtils+NSObject.h"; path = "Dependencies/FTUtils/Headers/FTUtils/FTUtils+NSObject.h"; sourceTree = "<group>"; };
-		C4F712D0114B06D100517517 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C4F713CE114C201000517517 /* DummyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DummyViewController.h; sourceTree = "<group>"; };
 		C4F713CF114C201000517517 /* DummyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyViewController.m; sourceTree = "<group>"; };
 		C4F713D0114C201000517517 /* DummyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DummyViewController.xib; sourceTree = "<group>"; };
@@ -62,10 +49,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
-				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
-				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
-				C4F712D1114B06D100517517 /* QuartzCore.framework in Frameworks */,
+				C45CD4A41210EDDE00517E00 /* CoreFoundation.framework in Frameworks */,
+				C45CD4A61210EDDE00517E00 /* Foundation.framework in Frameworks */,
+				C45CD4A81210EDDE00517E00 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,28 +118,11 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C4F7123C114B067D00517517 /* FTUtils */,
-				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
-				1D30AB110D05D00D00671497 /* Foundation.framework */,
-				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
-				C4F712D0114B06D100517517 /* QuartzCore.framework */,
+				C45CD4A31210EDDE00517E00 /* CoreFoundation.framework */,
+				C45CD4A51210EDDE00517E00 /* Foundation.framework */,
+				C45CD4A71210EDDE00517E00 /* UIKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C4F7123C114B067D00517517 /* FTUtils */ = {
-			isa = PBXGroup;
-			children = (
-				C4F71234114B067A00517517 /* FTAnimation.h */,
-				C4F71235114B067A00517517 /* FTAnimation+UIView.h */,
-				C4F71236114B067A00517517 /* FTAnimationManager.h */,
-				C4F71237114B067A00517517 /* FTUtils.h */,
-				C4F71238114B067A00517517 /* FTUtils+NSObject.h */,
-				C4F71231114B067A00517517 /* FTAnimation+UIView.m */,
-				C4F71232114B067A00517517 /* FTAnimationManager.m */,
-				C4F71233114B067A00517517 /* FTUtils+NSObject.m */,
-			);
-			name = FTUtils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,9 +183,6 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* FJSTransitionControllerDemoAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* FJSTransitionController.m in Sources */,
-				C4F71239114B067A00517517 /* FTAnimation+UIView.m in Sources */,
-				C4F7123A114B067A00517517 /* FTAnimationManager.m in Sources */,
-				C4F7123B114B067A00517517 /* FTUtils+NSObject.m in Sources */,
 				C4F713D1114C201000517517 /* DummyViewController.m in Sources */,
 				C4F713E5114C210500517517 /* AnotherViewController.m in Sources */,
 				C4AC0F9311B1B2E500FEE0ED /* NSObject+Proxy.m in Sources */,
@@ -261,7 +227,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphoneos3.1.3;
+				SDKROOT = iphoneos4.0;
 			};
 			name = Debug;
 		};
@@ -274,7 +240,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphoneos3.1.3;
+				SDKROOT = iphoneos4.0;
 			};
 			name = Release;
 		};
