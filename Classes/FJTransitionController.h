@@ -23,6 +23,8 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <QuartzCore/QuartzCore.h>
 
+@protocol FJTransitionControllerDelegate;
+
 typedef enum {
     FJPositionCenter = 0,
     FJPositionOffScreenTop,
@@ -63,8 +65,11 @@ void setViewControllerCenterPoint(FJPosition position, UIViewController* viewcon
     NSMutableArray* viewControllerKeyHistory;
 	
 	BOOL isTransitioning;
+    
+    id<FJTransitionControllerDelegate> delegate;
 
 }
+@property (nonatomic, assign) id<FJTransitionControllerDelegate> delegate;
 
 /****************************************************************************/
 /* 
@@ -166,9 +171,15 @@ void setViewControllerCenterPoint(FJPosition position, UIViewController* viewcon
 - (void)deallocateAllInactiveViewControllers;
 
 
-
-
 @end
+
+
+@protocol FJTransitionControllerDelegate <NSObject>
+
+- (void)transitionController:(FJTransitionController*)controller willLoadViewController:(UIViewController*)viewController animated:(BOOL)animted;
+- (void)transitionController:(FJTransitionController*)controller didLoadViewController:(UIViewController*)viewController animated:(BOOL)animted;
+
+@end 
 
 
 

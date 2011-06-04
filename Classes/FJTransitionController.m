@@ -247,8 +247,8 @@ static NSMutableDictionary* _controllers = nil;
 
 @synthesize controllerData;
 @synthesize viewControllerKeyHistory;
-
 @synthesize isTransitioning;
+@synthesize delegate;
 
 
 + (void)load{
@@ -262,7 +262,11 @@ static NSMutableDictionary* _controllers = nil;
 #pragma mark NSObject
 
 - (void)dealloc {
-	[controllerData release], controllerData = nil;
+    delegate = nil;
+    [viewControllerKeyHistory release];
+    viewControllerKeyHistory = nil;
+	[controllerData release]; 
+    controllerData = nil;
     [super dealloc];
 }
 
@@ -535,6 +539,9 @@ static NSMutableDictionary* _controllers = nil;
        
         viewControllerToDisplay.view.userInteractionEnabled = NO;
         viewControllerToRemove.view.userInteractionEnabled = NO;
+        
+        if([self.delegate respondsToSelector:@selector(transitionController:willLoadViewController:animated:)])
+            [self.delegate transitionController:self willLoadViewController:viewControllerToDisplay animated:NO];
 
         [self.view addSubview:viewControllerToDisplay.view];            
 
@@ -548,6 +555,9 @@ static NSMutableDictionary* _controllers = nil;
             
             //Unlock Transition Controller
             self.isTransitioning = NO;
+            
+            if([self.delegate respondsToSelector:@selector(transitionController:didLoadViewController:animated:)])
+                [self.delegate transitionController:self didLoadViewController:viewControllerToDisplay animated:NO];
             
             viewControllerToDisplay.view.userInteractionEnabled = YES;
             viewControllerToRemove.view.userInteractionEnabled = YES;
@@ -610,6 +620,9 @@ static NSMutableDictionary* _controllers = nil;
         viewControllerToDisplay.view.userInteractionEnabled = NO;
         viewControllerToRemove.view.userInteractionEnabled = NO;
         
+        if([self.delegate respondsToSelector:@selector(transitionController:willLoadViewController:animated:)])
+            [self.delegate transitionController:self willLoadViewController:viewControllerToDisplay animated:YES];
+        
         if(!viewOnTop && viewControllerToRemove)
             [self.view insertSubview:viewControllerToDisplay.view belowSubview:viewControllerToRemove.view];
         else
@@ -637,6 +650,9 @@ static NSMutableDictionary* _controllers = nil;
                                      
                                      //Unlock Transition Controller
                                      self.isTransitioning = NO;
+                                     
+                                     if([self.delegate respondsToSelector:@selector(transitionController:didLoadViewController:animated:)])
+                                         [self.delegate transitionController:self didLoadViewController:viewControllerToDisplay animated:NO];
                                      
                                      viewControllerToDisplay.view.userInteractionEnabled = YES;
                                      viewControllerToRemove.view.userInteractionEnabled = YES;

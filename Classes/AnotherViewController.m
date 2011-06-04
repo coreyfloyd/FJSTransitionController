@@ -19,16 +19,16 @@
 	//[self.transitionController loadViewControllerForKey:@"Dummy"];
     
     [self.transitionController loadViewControllerForKey:[self.transitionController lastViewControllerKey] 
-                                     appearingViewOnTop:YES 
+                                     appearingViewOnTop:NO
                                              setupBlock:^(UIViewController *appearingViewController) {
                                                  
-                                                 appearingViewController.view.alpha = 0;
-                                                 setViewControllerCenterPoint(FJPositionOffScreenTopLeft, appearingViewController);
+                                                 //appearingViewController.view.alpha = 0;
+                                                 //setViewControllerCenterPoint(FJPositionOffScreenTopLeft, appearingViewController);
                                                  
                                              } appearingViewAnimationBlock:^(UIViewController *appearingViewController) {
                                                  
-                                                 appearingViewController.view.alpha = 1.0;
-                                                 setViewControllerCenterPoint(FJPositionCenter, appearingViewController);
+                                                 //appearingViewController.view.alpha = 1.0;
+                                                 //setViewControllerCenterPoint(FJPositionCenter, appearingViewController);
                                                  
                                              } disappearingViewAnimationBlock:^(UIViewController *disappearingViewController) {
                                                  
