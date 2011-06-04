@@ -4,6 +4,8 @@
 #import <objc/runtime.h>
 
 
+//The following function borows heavily from FTUtils
+//Thanks for the inspiration!
 
 void setViewControllerCenterPoint(FJPosition position, UIViewController* viewcontroller){
     

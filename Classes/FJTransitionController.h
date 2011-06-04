@@ -35,7 +35,7 @@ typedef enum {
     FJPositionOffScreenBottomRight
 } FJPosition;
 
-//Use this method to easily set center points of views
+//Use this method to easily set center points of views relative to its transition controller. Useful for animations
 void setViewControllerCenterPoint(FJPosition position, UIViewController* viewcontroller);
 
 
@@ -102,10 +102,11 @@ void setViewControllerCenterPoint(FJPosition position, UIViewController* viewcon
               appearingViewOnTop:(BOOL)viewOnTop //some animations need the new view on top
                       setupBlock:(void (^)(UIViewController* appearingViewController))setupBlock //start hidden or offscreen?
      appearingViewAnimationBlock:(void (^)(UIViewController* appearingViewController))appearingViewAnimationBlock
-  disappearingViewAnimationBlock:(void (^)(UIViewController* disappearingViewController))disappearingViewAnimationBlock; //set the properties you want to animate. You can also specify animation options in each animation block i.e. [UIView setAnimationDuration:1.5]
+  disappearingViewAnimationBlock:(void (^)(UIViewController* disappearingViewController))disappearingViewAnimationBlock; //set the properties you want to animate. You can also specify animation options in each animation by opening an animation block. See [UIView animateWithDuration…] OR [UIView beginAnimations:context:].
 
 
 //OMG, I can get really fancy with my own animations!
+//TODO: implement
 
 /*
 - (void)loadViewControllerForKey:(NSString*)key
@@ -119,40 +120,36 @@ void setViewControllerCenterPoint(FJPosition position, UIViewController* viewcon
 /*
  Info
 */
+
+//convienece methods for important view controllers
 @property (nonatomic,readonly)UIViewController *activeViewController;
 @property (nonatomic,readonly)NSString *activeViewControllerKey;
-
 @property (nonatomic,readonly)UIViewController *lastViewController;
 @property (nonatomic,readonly)NSString *lastViewControllerKey;
 
 //Get all keys for all VCs
 @property(nonatomic,readonly)NSArray *allKeys;
 
-//get the history of view controllers. First key is the most recently shown view controller key
+//Get the history of previously loaded view controllers. First key is the the same as the activeViewControllerKey.
 @property (nonatomic,readonly,retain)NSArray *viewControllerKeyHistory;
 
 /* 
- The following mehtod will return a VC ONLY if one of the follwing scenarios is true:
- 1. You provided a fully instantiated VC using setController:forKey: OR loadController:
- 2. You have displayed a VC that you defined as a Class/Nib and it hasn't yet been dealloced
- 
- The basic premise is: if I don't have fully instantiated VC in memory, I am not going to create one now just for you to look at.
+ The following mehtod will instantiate a VC if it has not already been created
 */
 - (UIViewController*)viewControllerForKey:(NSString*)key;
 
 
 /* 
  Do you want to know if a transition is happening right now?
- Note, the transition controller will not alow you to load a VC while a transition is in progress! 
- */
-
+ Note: the transition controller will not alow you to load a VC while a transition is in progress! 
+*/
 @property(nonatomic,assign, readonly)BOOL isTransitioning;
 
 
 /****************************************************************************/
 
 /*
- Release view controller. Cleans up memory if you do not need the VC ro be active
+ Release view controller. Clean up memory if you do not need a VC to be active
 */
 - (void)releaseViewControllerForKey:(NSString*)key;
 
@@ -163,7 +160,7 @@ void setViewControllerCenterPoint(FJPosition position, UIViewController* viewcon
 - (void)removeViewControllerForKey:(NSString*)key;
 
 /*
- lets get rid of all thoe nast VCs taking up space
+ lets get rid of all those nasty VCs taking up space
  Note: this is called automatically upon receiving memory warnings
 */
 - (void)deallocateAllInactiveViewControllers;
