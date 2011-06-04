@@ -13,10 +13,13 @@ Transition animations are performed by setting any of the animatable view proper
 Just drop FJTransitionController.h/.m in your project.
 
 Add a property in your AppDelegate:
+
 ```
     @property (nonatomic,retain) FJTransitionController* myTransitionController;
 ```
+
 And add it to the window:
+
 ```
     [window addSubview:myTransitionController.view];
 ```
@@ -29,23 +32,30 @@ To set associate a view controller with a key:
     FJTransitionController* myTransitionController;  
     [myTransitionController setViewControllerClass:[MyVC class] forKey:@"myKey" withNavigationController:YES];
 ```
+
 To use a nib:  
+
 ```
     [myTransitionController setViewControllerClass:[MyVC class] nib:@"myVC" bundle:nil forKey:@"myKey" withNavigationController:YES];
 ```
-The "withNavigationController" flag allows you to optionally "wrap" any view controller in a UINavigationController.
 
+The "withNavigationController" flag allows you to optionally "wrap" any view controller in a UINavigationController.
+ 
 
 To load a VC without animation:  
+
 ```
     [myTransitionController loadViewControllerForKey:@"myKey"];
 ```
 
 You can access the history of what view controllers have been loaded by checking:
+
 ```
     @property (nonatomic,readonly,retain)NSArray *viewControllerKeyHistory;
 ```
+
 And there are a few connivence methods as well:
+
 ```
     @property (nonatomic,readonly)UIViewController *activeViewController;
     @property (nonatomic,readonly)NSString *activeViewControllerKey;
@@ -55,6 +65,7 @@ And there are a few connivence methods as well:
 
 
 Just like the UITabBarController and UINavigationCOntroller, every UIViewController has a convenience property to access the FJSTransitionController instance it is associated with:
+
 ```
     @property(nonatomic, readonly) FJSTransitionController* transitionController;
 ```
@@ -62,6 +73,7 @@ Just like the UITabBarController and UINavigationCOntroller, every UIViewControl
 
 ##Animations
 To use animations use the following method:
+
 ```
     [self.transitionController loadViewControllerForKey:@"MyVCKey" 
                                      appearingViewOnTop:YES 
