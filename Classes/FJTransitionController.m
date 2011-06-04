@@ -1,6 +1,5 @@
 
 #import "FJTransitionController.h"
-#import "NSObject+Proxy.h"
 #import <objc/runtime.h>
 
 
@@ -143,7 +142,7 @@ static NSMutableDictionary* _controllers = nil;
         
 }
 @property (nonatomic, copy) NSString *key;
-@property (nonatomic) Class class;
+@property (nonatomic, assign) Class class;
 @property (nonatomic, copy) NSString *nibName;
 @property (nonatomic, retain) NSBundle *bundle;
 @property (nonatomic) BOOL shouldUseNavigationController;

@@ -16,7 +16,6 @@
 		C45CD4A41210EDDE00517E00 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45CD4A31210EDDE00517E00 /* CoreFoundation.framework */; };
 		C45CD4A61210EDDE00517E00 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45CD4A51210EDDE00517E00 /* Foundation.framework */; };
 		C45CD4A81210EDDE00517E00 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45CD4A71210EDDE00517E00 /* UIKit.framework */; };
-		C4AC0F9311B1B2E500FEE0ED /* NSObject+Proxy.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AC0F9211B1B2E500FEE0ED /* NSObject+Proxy.m */; };
 		C4F713D1114C201000517517 /* DummyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F713CF114C201000517517 /* DummyViewController.m */; };
 		C4F713D2114C201000517517 /* DummyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4F713D0114C201000517517 /* DummyViewController.xib */; };
 		C4F713E5114C210500517517 /* AnotherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F713E3114C210500517517 /* AnotherViewController.m */; };
@@ -39,8 +38,6 @@
 		C45CD4A31210EDDE00517E00 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		C45CD4A51210EDDE00517E00 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C45CD4A71210EDDE00517E00 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		C4AC0F9111B1B2E500FEE0ED /* NSObject+Proxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Proxy.h"; sourceTree = "<group>"; };
-		C4AC0F9211B1B2E500FEE0ED /* NSObject+Proxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Proxy.m"; sourceTree = "<group>"; };
 		C4F713CE114C201000517517 /* DummyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DummyViewController.h; sourceTree = "<group>"; };
 		C4F713CF114C201000517517 /* DummyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyViewController.m; sourceTree = "<group>"; };
 		C4F713D0114C201000517517 /* DummyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DummyViewController.xib; sourceTree = "<group>"; };
@@ -73,8 +70,6 @@
 				1D3623250D0F684500981E51 /* FJTransitionControllerDemoAppDelegate.m */,
 				28D7ACF60DDB3853001CB0EB /* FJTransitionController.h */,
 				28D7ACF70DDB3853001CB0EB /* FJTransitionController.m */,
-				C4AC0F9111B1B2E500FEE0ED /* NSObject+Proxy.h */,
-				C4AC0F9211B1B2E500FEE0ED /* NSObject+Proxy.m */,
 				C4F713CE114C201000517517 /* DummyViewController.h */,
 				C4F713CF114C201000517517 /* DummyViewController.m */,
 				C4F713D0114C201000517517 /* DummyViewController.xib */,
@@ -199,7 +194,6 @@
 				28D7ACF80DDB3853001CB0EB /* FJTransitionController.m in Sources */,
 				C4F713D1114C201000517517 /* DummyViewController.m in Sources */,
 				C4F713E5114C210500517517 /* AnotherViewController.m in Sources */,
-				C4AC0F9311B1B2E500FEE0ED /* NSObject+Proxy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

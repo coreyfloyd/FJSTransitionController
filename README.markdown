@@ -1,84 +1,96 @@
 
-##Important Submodule Note:
-This applies to users prior to commit d98b1588e44d93f9589c3ff9ddd2c9a51f25f210
 
-A new fork of FTUtils is being used to address some animation issues.     
-You must delete the FTUtils folder after pulling. Then perform a "submodule init/update".   
+#FJTransitionController
+
+This class allows you to load view controllers and optionally animate transitions between the views.
+
+Instead of managing a stack (UINavigationController) or an array (UITabBarController) View controllers are keyed in a dictionary. Think of it as a replacement for UINavigationController or UITabBarController.
+
+Transition animations are performed by setting any of the animatable view properties. Optionally these changes can be nested in other animation blocks for fine grain timing and control.
+
+##Setup
+
+Just drop FJTransitionController.h/.m in your project.
+
+Add a property in your AppDelegate:
+
+@property (nonatomic,retain) FJTransitionController* myTransitionController;
+
+And add it to the window:
+
+[window addSubview:myTransitionController.view];
 
 
+##Basic Use
 
-#FJSTransitionController
-
-This class allows you to load arbitrary view controllers and animate transitions between the views.
-
-View controllers are keyed with strings that you provide. 
-
-It is a *FULL* replacement for UINavigationController and/or UITabBarController.
-
-Currently FJSTransitionController supports 8 types of animations which were created using the excellent FTUtils.
-
-##Use
 To set associate a view controller with a key:
 
-FJSTransitionControler* myTransitionController;  
-[myTransitionController setViewControllerClass:[MyVC class] forKey:@"myKey"];
+FJTransitionController* myTransitionController;  
+[myTransitionController setViewControllerClass:[MyVC class] forKey:@"myKey" withNavigationController:YES];
 
 To use a nib:  
-[myTransitionController setViewControllerClass:[MyVC class] nib:@"myVC" bundle:nil forKey:@"myKey"];
+[myTransitionController setViewControllerClass:[MyVC class] nib:@"myVC" bundle:nil forKey:@"myKey" withNavigationController:YES];
 
-To load a VC:  
+The "withNavigationController" flag allows you to optionally "wrap" any view controller in a UINavigationController.
+
+
+To load a VC without animation:  
 [myTransitionController loadViewControllerForKey:@"myKey"];
 
-Just like the UITabBarController and UINavigationCOntroller, every UIViewController has a convenience property to access the FJSTransitionController instance it has been added to:
+
+You can access the history of what view controllers have been loaded by checking:
+
+@property (nonatomic,readonly,retain)NSArray *viewControllerKeyHistory;
+
+And there are a few connivence methods as well:
+
+@property (nonatomic,readonly)UIViewController *activeViewController;
+@property (nonatomic,readonly)NSString *activeViewControllerKey;
+@property (nonatomic,readonly)UIViewController *lastViewController;
+@property (nonatomic,readonly)NSString *lastViewControllerKey;
+
+
+
+Just like the UITabBarController and UINavigationCOntroller, every UIViewController has a convenience property to access the FJSTransitionController instance it is associated with:
 
 @property(nonatomic, readonly) FJSTransitionController* transitionController;
 
 
 
 ##Animations
-You do not have to use animations, but if you want:
+To use animations use the following method:
 
-myTransitionController.animationType = FJSAnimationTypeSlide;  
-myTransitionController.animationDirection = FJSAmimationDirectionTop;  
-myTransitionController.animationDuration = 1.0;
+[self.transitionController loadViewControllerForKey:@"MyVCKey" 
+                                     appearingViewOnTop:YES 
+                                             setupBlock:^(UIViewController *appearingViewController) {
+                                         
+                                                 appearingViewController.view.alpha = 0;
+                                                 setViewControllerCenterPoint(FJPositionOffScreenBottom, appearingViewController);
+                                         
+                                     } appearingViewAnimationBlock:^(UIViewController *appearingViewController) {
+                                         
+                                         appearingViewController.view.alpha = 1.0;
+                                         setViewControllerCenterPoint(FJPositionCenter, appearingViewController);
 
-##UINavigationController support
+                                    } disappearingViewAnimationBlock:^(UIViewController *disappearingViewController) {
+                                    
+                                        setViewControllerCenterPoint(FJPositionOffScreenTop, disappearingViewController);
 
-For many View Controllers, an instance of UINavigationController is required for drill down functionality, etc…  
-Unfortunately, providing a fully instantiated view controller and navigation controller mitigates some of the memory saving functionality of the FJSTC.  
-To alleviate this, a new delegate method has been added:
-
-<code>
-- (BOOL)shouldWrapNavigationControllerAroundViewControllerForKey:(NSString*)key;
-</code>
-
-Now the FJSTransitionController will automatically "wrap" your VC in a UINavigationController instance, wheee!
+                                        
+                                     }];
 
 
+Each block passes back the view controller so that the properties can be changes. The first block allows setup like making the opacity 0.0 or moving eh view off screen. The next 2 blocks set the final properties of both the appearing and disappearing view controllers. To find out what you can manipulate, refer to the UIView Class Documentation.
+
+You can use the "setViewControllerCenterPoint" function to quickly set the center point for animations on and off screen.
 
 ##Behavior
-FJSTC sends your VCs all proper viewDid/WillAppear and viewDid/WillDissapear messages WITH proper timing (Just the way that Tab bars and Nav Controllers Work).
+FJTC sends your VCs all proper viewDid/WillAppear and viewDid/WillDisappear messages WITH proper timing (Just the way that Tab bars and Nav Controllers Work).
 
-Your VC's view have the userInteractionEnabled flag set to NO during animations. Only 1 VC can be loaded at a time. Trying to load another VC while a transition is occurring results in an Nonop.
+Your VC's view have the userInteractionEnabled flag set to NO during animations. Only 1 VC can be loaded at a time. Trying to load another VC while a transition is occurring results in a Nonop.
 
-FJSTransitionController also forwards DidRecieveMememoryWarning messages to your VCs. Additionally, it cleans up off screen VCs in low memory situations.  
-If you have provided the class and nib of a VC, it will also reinstantiate and VCs automatically. (It will be up to you to save any individual state in VWD/VDD/VDU and dealloc)
+FJTransitionController also forwards didRecieveMememoryWarning messages to your VCs. Additionally, it cleans up off screen VCs in low memory situations.  
+If you have provided the class and nib of a VC, it will also re-instantiate and VCs automatically. (It will be up to you to save any state in VWD/VDD/VDU and dealloc)
 
 
-It depends on 2 other open source projects: 
-
-####SDNextRunLoopProxy
-
-A nice NSObject category that allows you to easi send messages to objects on the next run loop.  
-
-####FTUtils
-
-FTUtils is added as a git submodule, to add it to this project enter the following commands in the Terminal:  
- 
-git submodule init
-git submodule update
-
-Then you will be able to compile. (You can also just download the source directly)  
-
-This project is still very much beta (as of mid-Mar 2010), but I am developing it for use in 2 other projects. So expect it to become production ready sooner than later.
 
