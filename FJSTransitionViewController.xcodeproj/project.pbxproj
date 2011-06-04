@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D3623260D0F684500981E51 /* FJSTransitionControllerDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* FJSTransitionControllerDemoAppDelegate.m */; };
+		1D3623260D0F684500981E51 /* FJTransitionControllerDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* FJTransitionControllerDemoAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
-		28D7ACF80DDB3853001CB0EB /* FJSTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* FJSTransitionController.m */; };
+		28D7ACF80DDB3853001CB0EB /* FJTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* FJTransitionController.m */; };
+		C454BC3A139A041000418774 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C454BC38139A041000418774 /* CoreGraphics.framework */; };
+		C454BC3B139A041000418774 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C454BC39139A041000418774 /* QuartzCore.framework */; };
 		C45CD4A41210EDDE00517E00 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45CD4A31210EDDE00517E00 /* CoreFoundation.framework */; };
 		C45CD4A61210EDDE00517E00 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45CD4A51210EDDE00517E00 /* Foundation.framework */; };
 		C45CD4A81210EDDE00517E00 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45CD4A71210EDDE00517E00 /* UIKit.framework */; };
@@ -22,15 +24,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1D3623240D0F684500981E51 /* FJSTransitionControllerDemoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FJSTransitionControllerDemoAppDelegate.h; sourceTree = "<group>"; };
-		1D3623250D0F684500981E51 /* FJSTransitionControllerDemoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FJSTransitionControllerDemoAppDelegate.m; sourceTree = "<group>"; };
+		1D3623240D0F684500981E51 /* FJTransitionControllerDemoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FJTransitionControllerDemoAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* FJTransitionControllerDemoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FJTransitionControllerDemoAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* FJSTransitionViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FJSTransitionViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		28D7ACF60DDB3853001CB0EB /* FJSTransitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FJSTransitionController.h; sourceTree = "<group>"; };
-		28D7ACF70DDB3853001CB0EB /* FJSTransitionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FJSTransitionController.m; sourceTree = "<group>"; };
+		28D7ACF60DDB3853001CB0EB /* FJTransitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FJTransitionController.h; sourceTree = "<group>"; };
+		28D7ACF70DDB3853001CB0EB /* FJTransitionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FJTransitionController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* FJSTransitionViewController_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FJSTransitionViewController_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* FJSTransitionViewController-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FJSTransitionViewController-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		C454BC251399CD4C00418774 /* MacroUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacroUtilities.h; sourceTree = "<group>"; };
+		C454BC38139A041000418774 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C454BC39139A041000418774 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C45CD4A31210EDDE00517E00 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		C45CD4A51210EDDE00517E00 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C45CD4A71210EDDE00517E00 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -49,6 +54,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C454BC3A139A041000418774 /* CoreGraphics.framework in Frameworks */,
+				C454BC3B139A041000418774 /* QuartzCore.framework in Frameworks */,
 				C45CD4A41210EDDE00517E00 /* CoreFoundation.framework in Frameworks */,
 				C45CD4A61210EDDE00517E00 /* Foundation.framework in Frameworks */,
 				C45CD4A81210EDDE00517E00 /* UIKit.framework in Frameworks */,
@@ -61,10 +68,11 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				1D3623240D0F684500981E51 /* FJSTransitionControllerDemoAppDelegate.h */,
-				1D3623250D0F684500981E51 /* FJSTransitionControllerDemoAppDelegate.m */,
-				28D7ACF60DDB3853001CB0EB /* FJSTransitionController.h */,
-				28D7ACF70DDB3853001CB0EB /* FJSTransitionController.m */,
+				C454BC251399CD4C00418774 /* MacroUtilities.h */,
+				1D3623240D0F684500981E51 /* FJTransitionControllerDemoAppDelegate.h */,
+				1D3623250D0F684500981E51 /* FJTransitionControllerDemoAppDelegate.m */,
+				28D7ACF60DDB3853001CB0EB /* FJTransitionController.h */,
+				28D7ACF70DDB3853001CB0EB /* FJTransitionController.m */,
 				C4AC0F9111B1B2E500FEE0ED /* NSObject+Proxy.h */,
 				C4AC0F9211B1B2E500FEE0ED /* NSObject+Proxy.m */,
 				C4F713CE114C201000517517 /* DummyViewController.h */,
@@ -118,6 +126,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C454BC38139A041000418774 /* CoreGraphics.framework */,
+				C454BC39139A041000418774 /* QuartzCore.framework */,
 				C45CD4A31210EDDE00517E00 /* CoreFoundation.framework */,
 				C45CD4A51210EDDE00517E00 /* Foundation.framework */,
 				C45CD4A71210EDDE00517E00 /* UIKit.framework */,
@@ -152,7 +162,11 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "FJSTransitionViewController" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -181,8 +195,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				1D3623260D0F684500981E51 /* FJSTransitionControllerDemoAppDelegate.m in Sources */,
-				28D7ACF80DDB3853001CB0EB /* FJSTransitionController.m in Sources */,
+				1D3623260D0F684500981E51 /* FJTransitionControllerDemoAppDelegate.m in Sources */,
+				28D7ACF80DDB3853001CB0EB /* FJTransitionController.m in Sources */,
 				C4F713D1114C201000517517 /* DummyViewController.m in Sources */,
 				C4F713E5114C210500517517 /* AnotherViewController.m in Sources */,
 				C4AC0F9311B1B2E500FEE0ED /* NSObject+Proxy.m in Sources */,
@@ -202,7 +216,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FJSTransitionViewController_Prefix.pch;
 				INFOPLIST_FILE = "FJSTransitionViewController-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = FJSTransitionViewController;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -214,7 +230,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FJSTransitionViewController_Prefix.pch;
 				INFOPLIST_FILE = "FJSTransitionViewController-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = FJSTransitionViewController;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};

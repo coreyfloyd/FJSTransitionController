@@ -7,16 +7,36 @@
 //
 
 #import "AnotherViewController.h"
-#import "FJSTransitionController.h"
+#import "FJTransitionController.h"
 
 
 @implementation AnotherViewController
 
 
 - (IBAction)pop{
-	
-	[[self transitionController] loadPreviousViewController];
+    
+	//[[self transitionController] loadViewControllerForKey:[self.transitionController lastViewControllerKey]];
 	//[self.transitionController loadViewControllerForKey:@"Dummy"];
+    
+    [self.transitionController loadViewControllerForKey:[self.transitionController lastViewControllerKey] 
+                                     appearingViewOnTop:YES 
+                                             setupBlock:^(UIViewController *appearingViewController) {
+                                                 
+                                                 appearingViewController.view.alpha = 0;
+                                                 setViewControllerCenterPoint(FJPositionOffScreenTopLeft, appearingViewController);
+                                                 
+                                             } appearingViewAnimationBlock:^(UIViewController *appearingViewController) {
+                                                 
+                                                 appearingViewController.view.alpha = 1.0;
+                                                 setViewControllerCenterPoint(FJPositionCenter, appearingViewController);
+                                                 
+                                             } disappearingViewAnimationBlock:^(UIViewController *disappearingViewController) {
+                                                 
+                                                 setViewControllerCenterPoint(FJPositionOffScreenBottomRight, disappearingViewController);
+                                                 
+                                                 
+                                             }];
+
 	
 }
 /*
@@ -60,6 +80,12 @@
 - (void)dealloc {
     [super dealloc];
 }
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    NSLog(@"Hello");
+}
+
 
 
 @end

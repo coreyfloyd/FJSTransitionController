@@ -7,15 +7,33 @@
 //
 
 #import "DummyViewController.h"
-#import "FJSTransitionController.h"
+#import "FJTransitionController.h"
 
 @implementation DummyViewController
 
 
 - (IBAction)newxtVC{
 
-	[self.transitionController loadViewControllerForKey:@"Another"]; 
+	//[self.transitionController loadViewControllerForKey:@"Another"]; 
 	
+    [self.transitionController loadViewControllerForKey:@"Another" 
+                                     appearingViewOnTop:YES 
+                                             setupBlock:^(UIViewController *appearingViewController) {
+                                         
+                                                 appearingViewController.view.alpha = 0;
+                                                 setViewControllerCenterPoint(FJPositionOffScreenBottom, appearingViewController);
+                                         
+                                     } appearingViewAnimationBlock:^(UIViewController *appearingViewController) {
+                                         
+                                         appearingViewController.view.alpha = 1.0;
+                                         setViewControllerCenterPoint(FJPositionCenter, appearingViewController);
+
+                                    } disappearingViewAnimationBlock:^(UIViewController *disappearingViewController) {
+                                    
+                                        setViewControllerCenterPoint(FJPositionOffScreenTop, disappearingViewController);
+
+                                        
+                                     }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,6 +51,11 @@
 
 - (void)dealloc {
     [super dealloc];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    NSLog(@"Hello");
 }
 
 
